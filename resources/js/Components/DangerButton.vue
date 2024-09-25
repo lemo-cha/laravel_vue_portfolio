@@ -1,7 +1,46 @@
 <template>
     <button
-        class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150"
+        class="c-button__danger"
     >
         <slot />
     </button>
 </template>
+
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+.c-button__danger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #dc2626;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        background-color: #ef4444;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        bottom: -4px;
+        left: -4px;
+        border-radius: 0.5rem;
+        border: 2px solid rgba(239, 68, 68, 0.5);
+        pointer-events: none;
+    }
+}
+</style>

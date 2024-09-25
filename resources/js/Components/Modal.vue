@@ -21,11 +21,7 @@ const emit = defineEmits(['close']);
 watch(
     () => props.show,
     () => {
-        if (props.show) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = null;
-        }
+        document.body.style.overflow = props.show ? 'hidden' : '';
     }
 );
 
@@ -45,50 +41,30 @@ onMounted(() => document.addEventListener('keydown', closeOnEscape));
 
 onUnmounted(() => {
     document.removeEventListener('keydown', closeOnEscape);
-    document.body.style.overflow = null;
+    document.body.style.overflow = '';
 });
 
 const maxWidthClass = computed(() => {
     return {
-        sm: 'sm:max-w-sm',
-        md: 'sm:max-w-md',
-        lg: 'sm:max-w-lg',
-        xl: 'sm:max-w-xl',
-        '2xl': 'sm:max-w-2xl',
+        sm: 'max-width-sm',
+        md: 'max-width-md',
+        lg: 'max-width-lg',
+        xl: 'max-width-xl',
+        '2xl': 'max-width-2xl',
     }[props.maxWidth];
 });
 </script>
 
 <template>
     <Teleport to="body">
-        <Transition leave-active-class="duration-200">
-            <div v-show="show" class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50" scroll-region>
-                <Transition
-                    enter-active-class="ease-out duration-300"
-                    enter-from-class="opacity-0"
-                    enter-to-class="opacity-100"
-                    leave-active-class="ease-in duration-200"
-                    leave-from-class="opacity-100"
-                    leave-to-class="opacity-0"
-                >
-                    <div v-show="show" class="fixed inset-0 transform transition-all" @click="close">
-                        <div class="absolute inset-0 bg-gray-500 opacity-75" />
-                    </div>
+        <Transition name="fade">
+            <div v-show="show" class="c-modal__overlay">
+                <Transition name="fade">
+                    <div v-show="show" class="c-modal__background" @click="close"></div>
                 </Transition>
 
-                <Transition
-                    enter-active-class="ease-out duration-300"
-                    enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-                    leave-active-class="ease-in duration-200"
-                    leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-                    leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                >
-                    <div
-                        v-show="show"
-                        class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
-                        :class="maxWidthClass"
-                    >
+                <Transition name="fade">
+                    <div class="c-modal__container" :class="maxWidthClass">
                         <slot v-if="show" />
                     </div>
                 </Transition>
@@ -96,3 +72,64 @@ const maxWidthClass = computed(() => {
         </Transition>
     </Teleport>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+.c-modal {
+    &__overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y: auto;
+        z-index: 50;
+        background-color: rgba(60, 64, 68, 0.75); // オーバーレイは透ける
+    }
+
+    &__background {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: transparent; // 透ける背景を追加
+    }
+
+    &__container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); // モーダルを中央に配置
+        background-color: white; // モーダルの背景色
+        z-index: 51; // オーバーレイより上に表示
+        border-radius: 0.5rem; // 丸みをつける
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); // シャドウを追加
+
+        // 最大幅のクラス
+        &.max-width-sm {
+            max-width: 24rem; // sm
+        }
+        &.max-width-md {
+            max-width: 28rem; // md
+        }
+        &.max-width-lg {
+            max-width: 32rem; // lg
+        }
+        &.max-width-xl {
+            max-width: 36rem; // xl
+        }
+        &.max-width-2xl {
+            max-width: 42rem; // 2xl
+        }
+    }
+}
+
+// トランジション用
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0;
+}
+
+</style>

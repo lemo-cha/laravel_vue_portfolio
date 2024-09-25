@@ -13,9 +13,7 @@ const props = defineProps({
 });
 
 const classes = computed(() =>
-    props.active
-        ? 'block w-full ps-3 pe-4 py-2 border-l-4 border-indigo-400 text-start text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out'
-        : 'block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out'
+    props.active ? 'c-navlink c-navlink--active' : 'c-navlink'
 );
 </script>
 
@@ -24,3 +22,48 @@ const classes = computed(() =>
         <slot />
     </Link>
 </template>
+
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+$color-gray-50: #f9fafb;
+$color-gray-300: rgb(209 213 219);
+$color-gray-600: #4b5563;
+$color-gray-800: #1f2937;
+$color-indigo-50: #eef2ff;
+$color-indigo-400: #6366f1;
+$color-indigo-700: #4338ca;
+$color-indigo-800: #3730a3;
+
+.c-navlink {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid transparent;
+  text-align: start;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $color-gray-600;
+  transition: all 0.15s ease-in-out;
+
+  &--active {
+    border-color: $color-indigo-400;
+    color: $color-indigo-700;
+    background-color: $color-indigo-50;
+  }
+
+  &:hover {
+    color: $color-gray-800;
+    background-color: $color-gray-50;
+    border-color: $color-gray-300;
+  }
+
+  &:focus {
+    outline: none;
+    color: $color-gray-800;
+    background-color: $color-gray-50;
+    border-color: $color-gray-300;
+  }
+}
+
+
+</style>

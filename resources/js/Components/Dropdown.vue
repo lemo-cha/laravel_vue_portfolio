@@ -12,7 +12,7 @@ const props = defineProps({
     },
     contentClasses: {
         type: String,
-        default: 'py-1 bg-white',
+        default: 'c-dropdown__content-inner',
     },
 });
 
@@ -27,17 +27,17 @@ onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
 const widthClass = computed(() => {
     return {
-        48: 'w-48',
+        48: 'c-dropdown--width-48',
     }[props.width.toString()];
 });
 
 const alignmentClasses = computed(() => {
     if (props.align === 'left') {
-        return 'ltr:origin-top-left rtl:origin-top-right start-0';
+        return 'c-dropdown--align-left';
     } else if (props.align === 'right') {
-        return 'ltr:origin-top-right rtl:origin-top-left end-0';
+        return 'c-dropdown--align-right';
     } else {
-        return 'origin-top';
+        return 'c-dropdown--align-center';
     }
 });
 
@@ -45,33 +45,96 @@ const open = ref(false);
 </script>
 
 <template>
-    <div class="relative">
+    <div class="c-dropdown">
         <div @click="open = !open">
             <slot name="trigger" />
         </div>
 
-        <!-- Full Screen Dropdown Overlay -->
-        <div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
+        <div v-show="open" class="c-dropdown__overlay" @click="open = false"></div>
 
         <Transition
-            enter-active-class="transition ease-out duration-200"
-            enter-from-class="opacity-0 scale-95"
-            enter-to-class="opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="opacity-100 scale-100"
-            leave-to-class="opacity-0 scale-95"
+            enter-active-class="c-dropdown__enter-active"
+            enter-from-class="c-dropdown__enter"
+            enter-to-class="c-dropdown__enter-to"
+            leave-active-class="c-dropdown__leave-active"
+            leave-from-class="c-dropdown__leave"
+            leave-to-class="c-dropdown__leave-to"
         >
             <div
                 v-show="open"
-                class="absolute z-50 mt-2 rounded-md shadow-lg"
+                class="c-dropdown__content"
                 :class="[widthClass, alignmentClasses]"
                 style="display: none"
                 @click="open = false"
             >
-                <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
+                <div class="c-dropdown__content-inner" :class="contentClasses">
                     <slot name="content" />
                 </div>
             </div>
         </Transition>
     </div>
 </template>
+
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+
+.c-dropdown {
+    position: relative;
+
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+    }
+
+    &__content {
+        position: absolute;
+        z-index: 50;
+        margin-top: 0.5rem;
+        border-radius: 0.375rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &__content-inner {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        background-color: white;
+        border-radius: 0.375rem;
+        box-shadow: $box-shadow-sm;
+    }
+
+    &--width-48 {
+        width: 12rem;
+    }
+
+    &--align-left {
+        transform-origin: top left;
+        left: 0;
+    }
+
+    &--align-right {
+        transform-origin: top right;
+        right: 0;
+    }
+
+    &--align-center {
+        transform-origin: top center;
+    }
+}
+
+.c-dropdown__enter,
+.c-dropdown__leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.c-dropdown__enter-active,
+.c-dropdown__leave-active {
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.c-dropdown__leave {
+    opacity: 1;
+    transform: scale(1);
+}
+</style>

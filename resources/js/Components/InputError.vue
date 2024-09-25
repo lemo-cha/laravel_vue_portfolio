@@ -13,3 +13,12 @@ defineProps({
         </p>
     </div>
 </template>
+
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+.c-message__error{
+    display: block;
+    font-size: $font-size_m;
+    color: $error-color;
+}
+</style>

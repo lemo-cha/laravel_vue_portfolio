@@ -7,8 +7,17 @@ defineProps({
 </script>
 
 <template>
-    <label class="block font-medium text-sm text-gray-700">
+    <label class="c-label">
         <span v-if="value">{{ value }}</span>
         <span v-else><slot /></span>
     </label>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+.c-label{
+    display: block;
+    font-weight: 500;
+    font-size: $font-size_m;
+}
+
+</style>

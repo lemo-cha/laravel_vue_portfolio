@@ -12,8 +12,33 @@ defineProps({
 <template>
     <Link
         :href="href"
-        class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+        class="c-link"
     >
         <slot />
     </Link>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+.c-link {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: start;
+    font-size: $font-size_m;
+    line-height: 1.25rem;
+    color: rgb(55 65 81);
+
+    &:hover {
+        background-color: rgb(243 244 246);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: rgb(243 244 246);
+    }
+
+    transition: background-color 0.15s ease-in-out;
+}
+
+
+</style>
