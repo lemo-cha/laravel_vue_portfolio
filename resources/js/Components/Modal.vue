@@ -44,15 +44,15 @@ onUnmounted(() => {
     document.body.style.overflow = '';
 });
 
-const maxWidthClass = computed(() => {
-    return {
-        sm: 'max-width-sm',
-        md: 'max-width-md',
-        lg: 'max-width-lg',
-        xl: 'max-width-xl',
-        '2xl': 'max-width-2xl',
-    }[props.maxWidth];
-});
+// const maxWidthClass = computed(() => {
+//     return {
+//         sm: 'max-width-sm',
+//         md: 'max-width-md',
+//         lg: 'max-width-lg',
+//         xl: 'max-width-xl',
+//         '2xl': 'max-width-2xl',
+//     }[props.maxWidth];
+// });
 </script>
 
 <template>
@@ -64,7 +64,7 @@ const maxWidthClass = computed(() => {
                 </Transition>
 
                 <Transition name="fade">
-                    <div class="c-modal__container" :class="maxWidthClass">
+                    <div class="c-modal__container"> <!-- :class="maxWidthClass" -->
                         <slot v-if="show" />
                     </div>
                 </Transition>
@@ -82,55 +82,43 @@ const maxWidthClass = computed(() => {
         bottom: 0;
         left: 0;
         overflow-y: auto;
+        padding: $space_lg;
         z-index: 50;
-        background-color: rgba(60, 64, 68, 0.75); // オーバーレイは透ける
+        @media #{map-get($breakpoints,'sm')}{
+            padding: 0;
+        }
     }
-
     &__background {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: transparent; // 透ける背景を追加
+        background-color: #6b7280;
+        opacity: 0.75;
     }
-
     &__container {
+        background: #ffffff;
+        border-radius: $radius_lg;
+        overflow: hidden;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); // モーダルを中央に配置
-        background-color: #ffffff; // モーダルの背景色
-        z-index: 51; // オーバーレイより上に表示
-        border-radius: $radius_lg; // 丸みをつける
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); // シャドウを追加
-        font-family: $font-default;
-
-        // 最大幅のクラス
-        &.max-width-sm {
-            max-width: 24rem; // sm
-        }
-        &.max-width-md {
-            max-width: 28rem; // md
-        }
-        &.max-width-lg {
-            max-width: 32rem; // lg
-        }
-        &.max-width-xl {
-            max-width: 36rem; // xl
-        }
-        &.max-width-2xl {
-            max-width: 42rem; // 2xl
+        transform: translate(-50%, -50%);
+        z-index: 51;
+        // スマホサイズの時のスタイル
+        width: 90%;
+        max-width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: $space_md;
+        @media #{map-get($breakpoints,'sm')}{
+            width: auto;
+            margin: 0 auto;
+            max-width: 42rem;
         }
     }
 }
-
-// トランジション用
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.3s ease;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0;
-}
-
 </style>
