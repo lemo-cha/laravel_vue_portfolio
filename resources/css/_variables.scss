@@ -24,9 +24,12 @@ $font-color_date: #e37b89;
 $color_corp: #e3a8b1;
 $font-color_sub1: #b6a489;
 
-//  input•button:focusの外枠、navlinkのcurrentなどに使用
+//  inputの外枠、button:focusの外枠、navlinkのcurrentなどに使用
+//  このプロジェクトではindigoを使用
 $accent-color: #4f46e5; 
 $accent-color_light: #6366f1;
+$accent-color_lightest: #eef2ff;
+$accent-color_dark: #4338ca;
 
 //  status,dangerbuttonなどに使用
 $error-color: #DC2626;

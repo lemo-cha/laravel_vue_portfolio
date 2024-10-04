@@ -38,8 +38,8 @@ const classes = computed(() =>
 
     &--active {
         border-color: $accent-color_light;
-        color: #4338ca;
-        background-color: #eef2ff;
+        color: $accent-color_dark;
+        background-color: $accent-color_lightest;
     }
 
     &:hover {
