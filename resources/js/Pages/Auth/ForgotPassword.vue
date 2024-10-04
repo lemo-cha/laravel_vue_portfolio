@@ -25,11 +25,11 @@ const submit = () => {
     <GuestLayout>
         <Head title="Forgot Password" />
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="p-content">
             パスワードをお忘れの場合は、ご登録時のメールアドレスを入力頂ければ、パスワードリセットのためのリンクをメールで送信いたします
         </div>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="p-status-text">
             {{ status }}
         </div>
 
@@ -40,21 +40,24 @@ const submit = () => {
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="p-content__error" :message="form.errors.email" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="p-content__button">
+                <PrimaryButton :class="{ 'is-processing': form.processing }" :disabled="form.processing">
                     パスワードリセットメールを送信
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_auth.scss";
+</style>

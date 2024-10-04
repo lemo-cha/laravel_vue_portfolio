@@ -38,49 +38,49 @@ const closeModal = () => {
 </script>
 
 <template>
-    <section class="space-y-6">
+    <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">アカウントを削除</h2>
+            <h2 class="p-content__title">アカウントを削除</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="p-content__text">
                 アカウントを削除すると、全てのデータとファイルも完全に削除されます。アカウントを削除する前に必要なデータがあれば事前にダウンロードの実施をお願いします。
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">削除</DangerButton>
+        <DangerButton class="p-content__button" @click="confirmUserDeletion">削除</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">
+            <div class="p-modal">
+                <h2 class="p-modal__title">
                     アカウントを削除して本当に大丈夫ですか？
                 </h2>
 
-                <p class="mt-1 text-sm text-gray-600">
+                <p class="p-modal__text">
                     アカウントを削除すると、全てのデータとファイルも完全に削除されます。完全にアカウントを削除するためには、確認のために再度パスワードを入力してください。
                 </p>
 
-                <div class="mt-6">
-                    <InputLabel for="password" value="パスワード" class="sr-only" />
+                <div class="p-modal__input">
+                    <InputLabel for="password" value="パスワード" class="p-modal__input-label" />
 
                     <TextInput
                         id="password"
                         ref="passwordInput"
                         v-model="form.password"
                         type="password"
-                        class="mt-1 block w-3/4"
+                        class="p-modal__input-field"
                         placeholder="Password"
                         @keyup.enter="deleteUser"
                     />
 
-                    <InputError :message="form.errors.password" class="mt-2" />
+                    <InputError :message="form.errors.password" class="p-modal__input-error" />
                 </div>
 
-                <div class="mt-6 flex justify-end">
+                <div class="p-modal__button">
                     <SecondaryButton @click="closeModal"> キャンセル </SecondaryButton>
 
                     <DangerButton
-                        class="ms-3"
-                        :class="{ 'opacity-25': form.processing }"
+                        class="u-button"
+                        :class="{ 'is-processing': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
@@ -91,3 +91,6 @@ const closeModal = () => {
         </Modal>
     </section>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_profile.scss";
+</style>

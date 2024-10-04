@@ -16,7 +16,7 @@ defineProps({
 @import "resources/css/_variables.scss";
 .c-label{
     display: block;
-    font-weight: 500;
+    font-weight: $font-weight_m;
     font-size: $font-size_m;
 }
 

@@ -22,19 +22,19 @@ defineProps({
 .c-link {
     display: block;
     width: 100%;
-    padding: 0.5rem 1rem;
+    padding: $space_sm $space_md;
     text-align: start;
     font-size: $font-size_m;
-    line-height: 1.25rem;
-    color: rgb(55 65 81);
+    line-height: $line-height_sm;
+    color: #374151;
 
     &:hover {
-        background-color: rgb(243 244 246);
+        background-color: #f3f4f6;
     }
 
     &:focus {
         outline: none;
-        background-color: rgb(243 244 246);
+        background-color: #f3f4f6;
     }
 
     transition: background-color 0.15s ease-in-out;

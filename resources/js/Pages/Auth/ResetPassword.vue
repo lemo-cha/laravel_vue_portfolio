@@ -36,57 +36,60 @@ const submit = () => {
         <Head title="Reset Password" />
 
         <form @submit.prevent="submit">
-            <div>
+            <div class="p-content">
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="p-content__error" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-content">
                 <InputLabel for="password" value="パスワード" />
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.password"
                     required
                     autocomplete="new-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="p-content__error" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-content">
                 <InputLabel for="password_confirmation" value="パスワード(再入力)" />
 
                 <TextInput
                     id="password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <InputError class="p-content__error" :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="p-content__button">
+                <PrimaryButton :class="{ 'is-processing': form.processing }" :disabled="form.processing">
                     リセット
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_auth.scss";
+</style>

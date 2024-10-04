@@ -12,53 +12,40 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="l-page">
+            <nav class="l-nav">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <div class="flex">
+                <div class="p-nav">
+                    <div class="p-nav__container">
+                        <div class="p-nav__container_left">
                             <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
+                            <div class="p-nav__container_left-logo">
                                 <Link :href="route('admin.dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
+                                    <ApplicationLogo />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="p-nav__container_left-link">
                                 <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
                                     HOME
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ms-6">
+                        <div class="p-nav__container_right">
                             <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
+                            <div class="p-nav__container_right-dropdown">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
-                                        <span class="inline-flex rounded-md">
+                                        <span class="p-dropdown">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                class="p-dropdown__button"
                                             >
                                                 {{ $page.props.auth.user.name }}
 
-                                                <svg
-                                                    class="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
+                                                <font-awesome-icon :icon="['fas','fa-caret-down']" class="p-dropdown__button-icon" />
                                             </button>
                                         </span>
                                     </template>
@@ -74,33 +61,14 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
+                        <div class="p-hamburger">
                             <button
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                class="p-hamburger-menu"
                             >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
+                                <font-awesome-icon class="p-hamburger-menu__icon" v-if="!showingNavigationDropdown" :icon="['fas','fa-bars']" flip />
+                                <font-awesome-icon class="p-hamburger-menu__icon" v-if="showingNavigationDropdown" :icon="['fas','fa-xmark']" flip />
+                                
                             </button>
                         </div>
                     </div>
@@ -109,26 +77,29 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div
                     :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
+                    class="p-responsive-nav"
                 >
-                    <div class="pt-2 pb-3 space-y-1">
+                    <div class="p-responsive-nav__link">
                         <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
                             HOME
                         </ResponsiveNavLink>
                     </div>
-
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
+                    <div class="p-responsive-nav__setting-options">
+                        <div class="p-setting-options__user-info">
+                            <div class="p-setting-options__user-info-name">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="p-setting-options__user-info-email">
+                                {{ $page.props.auth.user.email }}
+                            </div>
                         </div>
 
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> プロフィール </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                        <div class="p-setting-options__option">
+                            <ResponsiveNavLink :href="route('profile.edit')" class="p-setting-options__option-unit">
+                                プロフィール
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('logout')" method="post" as="button" class="p-setting-options__option-unit">
                                 ログアウト
                             </ResponsiveNavLink>
                         </div>
@@ -137,8 +108,8 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="l-header" v-if="$slots.header">
+                <div class="p-header">
                     <slot name="header" />
                 </div>
             </header>
@@ -150,3 +121,188 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_variables.scss";
+/*----------------
+---   Layout   ---
+----------------*/
+.l-page{
+    min-height: 100vh; 
+    //background: #F3F4F6; *画像を使用しない場合
+    font-family: $font-default;
+    background: 
+        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+        url(images/watercolor_00853_30722048.jpg) center / cover no-repeat fixed;
+}
+.l-nav{
+    border-bottom-width: 1px; 
+    border-color: #F3F4F6;
+    background: #ffffff;
+}
+.l-header{
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),0 1px 2px rgba(0,0,0,0.06);
+}
+/*-----------------
+---   Project   ---
+-----------------*/
+.p-nav{
+    padding: 0 $space_md;
+    margin: 0 auto;
+    max-width: 80rem;
+    @media #{map-get($breakpoints,'sm')}{
+        padding: 0 $space_lg;
+    }
+    @media #{map-get($breakpoints,'lg')}{
+        padding: 0 $space_xl;
+    }
+}
+.p-nav__container{
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    &_left{
+        display: flex;
+        &-logo{
+            width: 2.375rem;
+            height: auto;
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+        }
+        &-link{
+            display: none;
+            margin-left: $space_xl;
+            @media #{map-get($breakpoints,'sm')}{
+                display: flex;
+                margin-top: -1px;
+                margin-bottom: -1px;
+            }
+        }
+    }
+    &_right{
+        display: none;
+        @media #{map-get($breakpoints,'sm')}{
+            display: flex;
+            align-items: center;
+            &-dropdown{
+                margin-left: $space_xsm;
+                position: relative;
+            }
+        }
+    }
+}
+.p-dropdown{
+    display: inline-flex;
+    border-radius: $radius_md;
+}
+.p-dropdown__button{
+    display: inline-flex;
+    align-items: center;
+    padding: $space_sm $space_xsm; // px-3 py-2 に相当
+    border: 1px solid transparent;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    font-weight: $font-weight_m;
+    border-radius: $radius_md; // rounded-md
+    color: #6B7280; // text-gray-500
+    background-color: #FFFFFF; // bg-white
+    transition: all 150ms ease-in-out;
+
+    &:hover {
+        color: #374151; // hover:text-gray-700
+    }
+
+    &:focus {
+        outline: none; // focus:outline-none
+    }
+    &-icon{
+        margin-left: $space_sm;
+        margin-right: -0.125rem;
+        height: 1rem;
+        width: 1rem; 
+    }
+}
+.p-hamburger{
+    margin-right: -$space_sm;
+    display: flex;
+    align-items: center;
+    @media #{map-get($breakpoints,'sm')}{
+        display: none;
+    }
+}
+.p-hamburger-menu{
+    display: inline-flex; 
+    padding: $space_sm; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: $radius_md; 
+    color: #9CA3AF; 
+    &:hover{
+        color: #6B7280; 
+        background-color: #F3F4F6; 
+    }
+    &:focus{
+        outline-style: none; 
+        color: #6B7280; 
+        background-color: #F3F4F6; 
+    }
+}
+.p-hamburger-menu__icon{
+    width: 1.5rem; 
+    height: 1.5rem;
+    --fa-animation-iteration-count: 0.5;
+}
+.p-responsive-nav{
+    @media #{map-get($breakpoints,'sm')}{
+        display: none;
+    }
+}
+.p-responsive-nav__link{
+    padding-top: $space_sm;
+    padding-bottom: $space_xsm;
+    margin-top: $space_xs;
+}
+.p-responsive-nav__setting-options{
+    padding-bottom: $space_xs;
+    padding-top: $space_md;
+    border-top-width: 1px;
+    border-color: #e5e7eb;
+}
+.p-setting-options__user-info{
+    padding: 0 $space_md;
+    &-name{
+        line-height: $line-height_sm;
+        font-weight: $font-weight_m;
+        color: #1f2937;
+    }
+    &-email{
+        font-size: $font-size_m;
+        line-height: $line-height_sm;
+        font-weight: $font-weight_m;
+        color: #6b7280;
+    }
+}
+.p-setting-options__option{
+    margin-top: $space_md;
+    &-unit{
+        margin-top: $space_xs;
+    }
+}
+.p-header{
+    margin: auto;
+    padding: $space_lg $space_md;
+    max-width: 80rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: $line-height_sm;
+    @media #{map-get($breakpoints,'sm')}{
+        padding-left: $space_lg;
+        padding-right: $space_lg;
+    }
+    @media #{map-get($breakpoints,'lg')}{
+        padding-left: $space_xl;
+        padding-right: $space_xl;
+    }
+}
+</style>

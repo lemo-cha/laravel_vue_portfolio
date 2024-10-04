@@ -25,44 +25,35 @@ const classes = computed(() =>
 
 <style scoped lang="scss">
 @import "resources/css/_variables.scss";
-$color-gray-50: #f9fafb;
-$color-gray-300: rgb(209 213 219);
-$color-gray-600: #4b5563;
-$color-gray-800: #1f2937;
-$color-indigo-50: #eef2ff;
-$color-indigo-400: #6366f1;
-$color-indigo-700: #4338ca;
-$color-indigo-800: #3730a3;
-
 .c-navlink {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-left: 4px solid transparent;
-  text-align: start;
-  font-size: 1rem;
-  font-weight: 500;
-  color: $color-gray-600;
-  transition: all 0.15s ease-in-out;
+    display: block;
+    width: 100%;
+    padding: $space_sm $space_md;
+    border-left: 4px solid transparent;
+    text-align: start;
+    font-size: $font-size_default;
+    font-weight: $font-weight_m;
+    color: #4b5563;
+    transition: all 0.15s ease-in-out;
 
-  &--active {
-    border-color: $color-indigo-400;
-    color: $color-indigo-700;
-    background-color: $color-indigo-50;
-  }
+    &--active {
+        border-color: $accent-color_light;
+        color: #4338ca;
+        background-color: #eef2ff;
+    }
 
-  &:hover {
-    color: $color-gray-800;
-    background-color: $color-gray-50;
-    border-color: $color-gray-300;
-  }
+    &:hover {
+        color: #1f2937;
+        background-color: #f9fafb;
+        border-color: #d1d5db;
+    }
 
-  &:focus {
-    outline: none;
-    color: $color-gray-800;
-    background-color: $color-gray-50;
-    border-color: $color-gray-300;
-  }
+    &:focus {
+        outline: none;
+        color: #1f2937;
+        background-color: #f9fafb;
+        border-color: #d1d5db;
+    }
 }
 
 

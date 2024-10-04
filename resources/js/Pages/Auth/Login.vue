@@ -33,62 +33,65 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="p-status-text">
             {{ status }}
         </div>
 
         <form @submit.prevent="submit">
-            <div>
+            <div class="p-content">
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="p-content__error" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-content">
                 <InputLabel for="password" value="Password" />
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="p-content__error" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
+            <div class="p-content__checkbox">
+                <label class="p-content__checkbox-label">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">ログイン状態を保持</span>
+                    <span class="p-content__checkbox-text">ログイン状態を保持</span>
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="p-content__button">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="p-content__button-link"
                 >
                     パスワードを忘れた方はこちら
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="p-content__button-layout" :class="{ 'is-processing': form.processing }" :disabled="form.processing">
                     ログイン
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_auth.scss";
+</style>

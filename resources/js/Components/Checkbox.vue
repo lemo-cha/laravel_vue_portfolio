@@ -37,7 +37,7 @@ const proxyChecked = computed({
 @import "resources/css/_variables.scss";
 
 .c-checkbox{
-    border-radius: 0.25rem;
+    border-radius: $radius_sm;
     border: 1px solid #d1d5db;
     color: $accent-color;
     box-shadow: $box-shadow-sm;

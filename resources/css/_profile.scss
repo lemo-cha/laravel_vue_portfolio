@@ -1,0 +1,149 @@
+@import "resources/css/_variables.scss";
+/*----------------
+---   Layout   ---
+----------------*/
+.l-page{
+    padding: $space_3l 0;
+}
+.l-page__container{
+    margin: 0 auto;
+    max-width: 80rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: $space_lg;
+    @media #{map-get($breakpoints,'sm')}{
+        padding: 0 $space_lg;
+    }
+    @media #{map-get($breakpoints,'xl')}{
+        padding: 0 $space_xl;
+    }
+}
+/*-----------------
+---   Project   ---
+-----------------*/
+.p-content{
+    padding: $space_md;
+    background: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),$box-shadow-sm;
+    @media #{map-get($breakpoints,'sm')}{
+        padding: $space_xl;
+        border-radius: $radius_lg;
+    }
+    &-size{
+        max-width: 36rem;
+    }
+}
+.p-content__title{
+    font-size: $font-size_l;
+    line-height: $line-height_sm;
+    font-weight: $font-weight_m;
+}
+.p-content__text{
+    margin-top: $space_xs;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    color: #4b5563;
+}
+.p-content__form{
+    margin-top: $space_lg;
+    &-input{
+        margin-top: $space_lg;
+        &-field{
+            display: block;
+            margin-top: $space_xs;
+            width:  100%;
+        }
+        &-error{
+            margin-top: $space_sm;
+        }
+    }
+}
+.p-content__button{
+    margin-top: $space_lg;
+    display: flex;
+    gap: $space_md;
+    align-items: center;
+    &-message{
+        font-size: $font-size_m;
+        line-height: $line-height_sm;
+        color: $success-color;
+    }
+}
+.p-modal{
+    padding: $space_lg;
+}
+.p-modal__title{
+    font-size: $font-size_l;
+    line-height: $line-height_sm;
+    font-weight: $font-weight_m;
+}
+.p-modal__text{
+    margin-top: $space_xs;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    color: #4b5563;
+}
+.p-modal__input{
+    margin-top: $space_lg;
+    &-label{
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+    &-field{
+        display: block;
+        margin-top: $space_xs;
+        width: 75%;
+    }
+    &-error{
+        margin-top: $space_sm;
+    }
+}
+.p-modal__button{
+    display: flex;
+    margin-top: $space_lg;
+    justify-content: flex-end;
+}
+/*-----------------
+---   Utility   ---
+-----------------*/
+.u-text{
+    margin-top: $space_xs;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+}
+.u-text-link{
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    color: #4b5563;
+    text-decoration: underline;
+    &:hover{
+        opacity: 0.7;
+    }
+}
+.u-text-success{
+    margin-top: $space_sm;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    font-weight: $font-weight_m;
+    color: $success-color;
+}
+.u-button{
+    margin-inline-start: $space_xsm;
+}
+.is-processing{
+    opacity: 0.25;
+    pointer-events: none;
+}
+.v-enter-active,.v-leave-active{
+    transition: opacity 0.5s ease;
+}
+.v-enter, .v-leave-to{
+    opacity: 0;
+}

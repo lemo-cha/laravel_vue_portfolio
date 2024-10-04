@@ -25,53 +25,53 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">アカウント情報</h2>
+            <h2 class="p-content__title">アカウント情報</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="p-content__text">
                 アカウント情報とメールアドレスを更新できます
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            <div>
+        <form @submit.prevent="form.patch(route('profile.update'))" class="p-content__form">
+            <div class="p-content__form-input">
                 <InputLabel for="name" value="お名前" />
 
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="p-content__form-input-field"
                     v-model="form.name"
                     required
                     autofocus
                     autocomplete="name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="p-content__form-input-error" :message="form.errors.name" />
             </div>
 
-            <div>
+            <div class="p-content__form-input">
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="p-content__form-input-field"
                     v-model="form.email"
                     required
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="p-content__form-input-error" :message="form.errors.email" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="text-sm mt-2 text-gray-800">
+                <p class="u-text">
                     メールアドレスが未確認です
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="u-text__link"
                     >
                     ここをクリックすると確認用メールを再送します
                     </Link>
@@ -79,24 +79,22 @@ const form = useForm({
 
                 <div
                     v-show="status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600"
+                    class="u-text-success"
                 >
                 あなたのメールアドレスに確認用のリンクが送信されました
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="p-content__button">
                 <PrimaryButton :disabled="form.processing">保存</PrimaryButton>
 
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">保存しました</p>
+                <Transition>
+                    <p v-if="form.recentlySuccessful" class="p-content__button-message">保存しました</p>
                 </Transition>
             </div>
         </form>
     </section>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_profile.scss";
+</style>

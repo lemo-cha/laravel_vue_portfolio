@@ -1,40 +1,24 @@
-<template>
-    <button
-        class="c-button c-button__danger"
-    >
-        <slot />
-    </button>
-</template>
-
-<style scoped lang="scss">
-@import "resources/css/_button.scss";
-</style>
-
-<!-- <style scoped lang="scss">
 @import "resources/css/_variables.scss";
-.c-button__danger {
+// button.scss
+.c-button {
     position: relative;
     display: inline-flex;
     align-items: center;
     padding: $space_sm $space_md;
-    background-color: $error-color;
     border: 1px solid transparent;
     border-radius: $radius_md;
     font-weight: 600;
     font-size: $font-size_s;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ffffff;
     transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-    &:hover {
-        background-color: #ef4444;
+    color: $font-color_default;
+    &:hover{
+        opacity: 0.8;
     }
-
     &:focus {
         outline: none;
     }
-
     &:focus::before {
         content: '';
         position: absolute;
@@ -43,8 +27,26 @@
         bottom: -4px;
         left: -4px;
         border-radius: $radius_lg;
-        border: 2px solid rgba(239, 68, 68, 0.5);
+        border: 2px solid rgba($accent-color_light, 0.5);
         pointer-events: none;
     }
+    // Secondary Button
+    &__secondary {
+        background-color: #ffffff;
+        border-color: #d1d5db;
+        color: $font-color_default;
+    }
+    // Primary Button
+    &__primary {
+        background-color: #1f2937;
+        color: #ffffff;
+    }
+    // Danger Button
+    &__danger {
+        background-color: $error-color;
+        color: #ffffff;
+        &:focus::before {
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+    }
 }
-</style> -->

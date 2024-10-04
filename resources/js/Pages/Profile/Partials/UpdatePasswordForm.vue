@@ -36,15 +36,15 @@ const updatePassword = () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">パスワード変更</h2>
+            <h2 class="p-content__title">パスワード変更</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="p-content__text">
                 十分に長くランダムなパスワードを使用して、アカウントのセキュリティを高めましょう
             </p>
         </header>
 
-        <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
-            <div>
+        <form @submit.prevent="updatePassword" class="p-content__form">
+            <div class="p-content__form-input">
                 <InputLabel for="current_password" value="現在のパスワード" />
 
                 <TextInput
@@ -52,14 +52,14 @@ const updatePassword = () => {
                     ref="currentPasswordInput"
                     v-model="form.current_password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__form-input-field"
                     autocomplete="current-password"
                 />
 
-                <InputError :message="form.errors.current_password" class="mt-2" />
+                <InputError :message="form.errors.current_password" class="p-content__form-input-error" />
             </div>
 
-            <div>
+            <div class="p-content__form-input">
                 <InputLabel for="password" value="新しいパスワード" />
 
                 <TextInput
@@ -67,39 +67,37 @@ const updatePassword = () => {
                     ref="passwordInput"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__form-input-field"
                     autocomplete="new-password"
                 />
 
-                <InputError :message="form.errors.password" class="mt-2" />
+                <InputError :message="form.errors.password" class="p-content__form-input-error" />
             </div>
 
-            <div>
+            <div class="p-content__form-input">
                 <InputLabel for="password_confirmation" value="新しいパスワード(再入力)" />
 
                 <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__form-input-field"
                     autocomplete="new-password"
                 />
 
-                <InputError :message="form.errors.password_confirmation" class="mt-2" />
+                <InputError :message="form.errors.password_confirmation" class="p-content__form-input-error" />
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="p-content__button">
                 <PrimaryButton :disabled="form.processing">保存</PrimaryButton>
 
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">保存しました</p>
+                <Transition>
+                    <p v-if="form.recentlySuccessful" class="p-content__button-message">保存しました</p>
                 </Transition>
             </div>
         </form>
     </section>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_profile.scss";
+</style>

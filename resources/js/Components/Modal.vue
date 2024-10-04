@@ -100,10 +100,11 @@ const maxWidthClass = computed(() => {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%); // モーダルを中央に配置
-        background-color: white; // モーダルの背景色
+        background-color: #ffffff; // モーダルの背景色
         z-index: 51; // オーバーレイより上に表示
-        border-radius: 0.5rem; // 丸みをつける
+        border-radius: $radius_lg; // 丸みをつける
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); // シャドウを追加
+        font-family: $font-default;
 
         // 最大幅のクラス
         &.max-width-sm {

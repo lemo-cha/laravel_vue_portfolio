@@ -21,8 +21,9 @@ const submit = () => {
     <GuestLayout>
         <Head title="Confirm Password" />
 
-        <div class="mb-4 text-sm text-gray-600">
-            認証が必要なページです パスワードを入力して確認ボタンをクリックしてください
+        <div class="p-content">
+            認証が必要なページです<br>
+            パスワードを入力して確認ボタンをクリックしてください
         </div>
 
         <form @submit.prevent="submit">
@@ -31,20 +32,23 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="p-content__input"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
                     autofocus
                 />
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="p-content__error" :message="form.errors.password" />
             </div>
 
-            <div class="flex justify-end mt-4">
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="p-content__button">
+                <PrimaryButton class="p-content__button-layout" :class="{ 'is-processing': form.processing }" :disabled="form.processing">
                     確認
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_auth.scss";
+</style>

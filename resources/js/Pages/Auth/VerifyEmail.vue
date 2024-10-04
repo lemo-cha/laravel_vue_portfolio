@@ -23,17 +23,17 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
     <GuestLayout>
         <Head title="Email Verification" />
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="p-content">
             ご登録頂きありがとうございます。メールアドレス確認のリンクを送付しましたので、メールに記載のリンクをクリックしてください。メールが届いていない場合には、再送も可能です
         </div>
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent">
+        <div class="p-status-text" v-if="verificationLinkSent">
             ユーザ登録時に入力頂いたメールアドレス宛にメールアドレス確認リンクを再送しました
         </div>
 
         <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="p-content__button u-button__layout-left">
+                <PrimaryButton :class="{ 'is-processing': form.processing }" :disabled="form.processing">
                     メールアドレス確認リンクの再送
                 </PrimaryButton>
 
@@ -41,10 +41,13 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
                     :href="route('logout')"
                     method="post"
                     as="button"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="p-content__button-link"
                     >ログアウト</Link
                 >
             </div>
         </form>
     </GuestLayout>
 </template>
+<style scoped lang="scss">
+@import "resources/css/_auth.scss";
+</style>

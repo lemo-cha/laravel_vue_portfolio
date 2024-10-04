@@ -30,14 +30,14 @@ const classes = computed(() => {
 .c-link {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.5rem; // 1pt 1px
+    padding: $space_xs $space_sm;
     border-bottom: 2px solid transparent;
-    font-size: $font-size_m; // 14px
-    font-weight: 500;
-    line-height: 1.25; // 20px
+    font-size: $font-size_m;
+    font-weight: $font-weight_m;
+    line-height: $line-height_sm;
 
     &--active {
-        border-bottom-color: $accent-color; // indigo-400
+        border-bottom-color: $accent-color;
         color: #1f2937; // gray-900
     }
 

@@ -1,24 +1,38 @@
 /*
-  vueファイルに書くテンプレート
+vueファイルに書くテンプレート
 
 <style scoped lang="scss">
 @import "resources/css/_variables.scss";
 
 </style>
+
 */
 
+/*----------------
+---   Layout   ---
+----------------*/
+/*-----------------
+---   Project   ---
+-----------------*/
+/*-----------------
+---   Utility   ---
+-----------------*/
 
-$font-color_default: rgb(68 64 60);
+// color
+$font-color_default: #44403C;
 $font-color_date: #e37b89;
 $color_corp: #e3a8b1;
 $font-color_sub1: #b6a489;
 
-$accent-color: #4f46e5;
-$error-color: rgb(220 38 38);
-$success-color: rgb(37 99 235);
+//  input•button:focusの外枠、navlinkのcurrentなどに使用
+$accent-color: #4f46e5; 
+$accent-color_light: #6366f1;
 
-$site-width: 980px;
+//  status,dangerbuttonなどに使用
+$error-color: #DC2626;
+$success-color: #2563EB;
 
+// font-size
 $font-size_s: 0.75rem;
 $font-size_m: 0.875rem;
 $font-size_default: 1rem;
@@ -27,17 +41,38 @@ $font-size_xl: 1.5rem;
 $font-size_xxl: 1.875rem;
 $font-size_3l: 2.375rem;
 
-$space_s: 0.3125rem;
-$space_m: 0.625rem;
-$space_l: 1rem;
-$space_xl: 1.25rem;
-$space_xxl: 1.875rem;
-$space_3l: 2.5rem;
+// font-weight    *default:400
+$font-weight_m: 500;
 
-$font-family_corp: 'Amatic SC', cursive;
+// font-family
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+$font-default: 'M PLUS Rounded 1c',sans-serif;
 
-$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+// space
+$space_xs: 0.25rem;
+$space_sm: 0.5rem;
+$space_xsm: 0.75rem;
+$space_md: 1rem;
+$space_lg: 1.5rem;
+$space_xl: 2rem;
+$space_xxl: 2.5rem;
+$space_3l: 3rem;
 
+// line-height
+$line-height_default: 1.2;
+$line-height_sm: 1.5;
+$line-height_md: 1.5rem;
+$line-height_lg: 1.75rem;
+
+// border-radius
+$radius_sm: 0.25rem;
+$radius_md: 0.375rem;
+$radius_lg: 0.5rem;
+
+// box-shadow
+$box-shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+
+//  responsive
 $breakpoints: (
   'sm': 'screen and (min-width: 640px)',
   'md': 'screen and (min-width: 768px)',
@@ -45,26 +80,3 @@ $breakpoints: (
   'xl': 'screen and (min-width: 1280px)',
   '2xl': 'screen and (min-width: 1536px)',
 ) !default;
-
-// Colors
-$color-gray-500: #6b7280;
-$color-white: #ffffff;
-$color-black-opacity-75: rgba(0, 0, 0, 0.75);
-
-// Typography
-$font-size-base: 1rem; // 16px
-$font-size-sm: 0.875rem; // 14px
-
-// Spacing
-$spacing-4: 1rem; // 16px
-$spacing-6: 1.5rem; // 24px
-
-// Transitions
-$transition-duration-fast: 0.2s;
-$transition-duration-slow: 0.3s;
-
-// Shadows
-$box-shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
-
-// Border Radius
-$border-radius-lg: 0.75rem; // 12px

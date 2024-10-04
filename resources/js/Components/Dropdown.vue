@@ -90,16 +90,15 @@ const open = ref(false);
     &__content {
         position: absolute;
         z-index: 50;
-        margin-top: 0.5rem;
-        border-radius: 0.375rem;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        margin-top: $space_sm;
+        border-radius: $radius_md;
+        box-shadow: $box-shadow-sm;
     }
 
     &__content-inner {
-        padding-top: 0.25rem;
-        padding-bottom: 0.25rem;
-        background-color: white;
-        border-radius: 0.375rem;
+        padding: $space_xs 0;
+        background-color: #ffffff;
+        border-radius: $radius_md;
         box-shadow: $box-shadow-sm;
     }
 
