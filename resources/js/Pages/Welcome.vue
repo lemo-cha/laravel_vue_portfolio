@@ -80,7 +80,7 @@ onMounted(() => {
 ---   Layout   ---
 ----------------*/
 .l-page{
-    background: #f9fafb;
+    //background: #f9fafb; *画像を使用しない場合
     color: $font-color_default;
     font-family: $font-default;
     width: 100%;
@@ -88,7 +88,7 @@ onMounted(() => {
     overflow: hidden;
     background: 
         linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
-        url(images/watercolor_00853_30722048.jpg) center / cover no-repeat fixed;
+        url('/images/watercolor_00853_30722048.jpg') center / cover no-repeat fixed;
 }
 .l-page__container{
     position: relative;

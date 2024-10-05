@@ -27,10 +27,11 @@ import { Link } from '@inertiajs/vue3';
     align-items: center;
     min-height: 100vh;
     //background: #f3f4f6; *画像を使用しない場合
+    color: $font-color_default;
     font-family: $font-default;
     background: 
         linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
-        url(images/watercolor_00853_30722048.jpg) center / cover no-repeat fixed;
+        url('/images/watercolor_00853_30722048.jpg') center / cover no-repeat fixed;
     @media #{map-get($breakpoints,'sm')}{
         padding-top: 0;
         justify-content: center;

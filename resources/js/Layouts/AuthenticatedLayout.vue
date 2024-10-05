@@ -129,10 +129,11 @@ const showingNavigationDropdown = ref(false);
 .l-page{
     min-height: 100vh; 
     //background: #F3F4F6; *画像を使用しない場合
+    color: $font-color_default;
     font-family: $font-default;
     background: 
         linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
-        url(images/watercolor_00853_30722048.jpg) center / cover no-repeat fixed;
+        url('/images/watercolor_00853_30722048.jpg') center / cover no-repeat fixed;
 }
 .l-nav{
     border-bottom-width: 1px; 
@@ -237,7 +238,7 @@ const showingNavigationDropdown = ref(false);
     justify-content: center; 
     align-items: center; 
     border-radius: $radius_md; 
-    color: #9CA3AF; 
+    color: #6B7280;
     &:hover{
         color: #6B7280; 
         background-color: #F3F4F6; 
@@ -267,14 +268,14 @@ const showingNavigationDropdown = ref(false);
     padding-bottom: $space_xs;
     padding-top: $space_md;
     border-top-width: 1px;
-    border-color: #e5e7eb;
+    border-color: #d1d5db;
 }
 .p-setting-options__user-info{
     padding: 0 $space_md;
     &-name{
         line-height: $line-height_sm;
         font-weight: $font-weight_m;
-        color: #1f2937;
+        color: $font-color_default;
     }
     &-email{
         font-size: $font-size_m;
@@ -297,12 +298,10 @@ const showingNavigationDropdown = ref(false);
     font-weight: 600;
     line-height: $line-height_sm;
     @media #{map-get($breakpoints,'sm')}{
-        padding-left: $space_lg;
-        padding-right: $space_lg;
+        padding: $space_lg $space_lg;
     }
     @media #{map-get($breakpoints,'lg')}{
-        padding-left: $space_xl;
-        padding-right: $space_xl;
+        padding: $space_lg $space_xl;
     }
 }
 </style>

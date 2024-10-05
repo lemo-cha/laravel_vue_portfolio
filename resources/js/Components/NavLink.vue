@@ -38,7 +38,7 @@ const classes = computed(() => {
 
     &--active {
         border-bottom-color: $accent-color;
-        color: #1f2937; // gray-900
+        color: $font-color_default;
     }
 
     &:not(&--active) {

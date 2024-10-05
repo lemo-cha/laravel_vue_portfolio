@@ -6,7 +6,6 @@
     margin-bottom: $space_md;
     font-size: $font-size_m;
     line-height: $line-height_sm;
-    color: #4b5563;
 }
 .p-status-text{
     margin-bottom: $space_md;
@@ -33,7 +32,6 @@
     &-text{
         font-size: $font-size_m;
         line-height: $line-height_sm;
-        color: #4b5563;
     }
 }
 .p-content__button{
@@ -46,6 +44,9 @@
         line-height: $line-height_sm;
         color: #4b5563;
         text-decoration: underline;
+        &:hover{
+            color: $font-color_default;
+        }
     }
     &-layout{
         margin-inline-start: $space_md;

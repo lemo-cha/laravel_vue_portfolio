@@ -35,26 +35,21 @@ const classes = computed(() =>
     font-weight: $font-weight_m;
     color: #4b5563;
     transition: all 0.15s ease-in-out;
-
     &--active {
         border-color: $accent-color_light;
         color: $accent-color_dark;
         background-color: $accent-color_lightest;
     }
-
     &:hover {
-        color: #1f2937;
-        background-color: #f9fafb;
+        color: $font-color_default;
+        background-color: #f3f4f6;
         border-color: #d1d5db;
     }
-
     &:focus {
         outline: none;
-        color: #1f2937;
-        background-color: #f9fafb;
+        color: $font-color_default;
+        background-color: #f3f4f6;
         border-color: #d1d5db;
     }
 }
-
-
 </style>
