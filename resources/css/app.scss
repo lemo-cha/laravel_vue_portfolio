@@ -1,17 +1,9 @@
 @charset "UTF-8";
 
 /*----------------
-  tailwindcss
-----------------*/
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-/*----------------
   Foundation
 ----------------*/
 
 @use "_destyle.css";
 @use "_variables.scss";
-
+@use "_base.scss";

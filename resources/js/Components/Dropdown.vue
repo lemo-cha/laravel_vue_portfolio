@@ -52,14 +52,7 @@ const open = ref(false);
 
         <div v-show="open" class="c-dropdown__overlay" @click="open = false"></div>
 
-        <Transition
-            enter-active-class="c-dropdown__enter-active"
-            enter-from-class="c-dropdown__enter"
-            enter-to-class="c-dropdown__enter-to"
-            leave-active-class="c-dropdown__leave-active"
-            leave-from-class="c-dropdown__leave"
-            leave-to-class="c-dropdown__leave-to"
-        >
+        <Transition>
             <div
                 v-show="open"
                 class="c-dropdown__content"
@@ -76,64 +69,51 @@ const open = ref(false);
 </template>
 
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
-
-.c-dropdown {
+@use 'resources/css/_variables.scss' as *;
+.c-dropdown{
     position: relative;
-
-    &__overlay {
+    &__overlay{
         position: fixed;
         inset: 0;
         z-index: 40;
     }
-
-    &__content {
+    &__content{
         position: absolute;
         z-index: 50;
         margin-top: $space_sm;
         border-radius: $radius_md;
         box-shadow: $box-shadow-sm;
     }
-
-    &__content-inner {
+    &__content-inner{
         padding: $space_xs 0;
-        background-color: #ffffff;
+        background-color: $bg-color_content;
         border-radius: $radius_md;
         box-shadow: $box-shadow-sm;
     }
-
-    &--width-48 {
+    &--width-48{
         width: 12rem;
     }
-
-    &--align-left {
+    &--align-left{
         transform-origin: top left;
         left: 0;
     }
-
-    &--align-right {
+    &--align-right{
         transform-origin: top right;
         right: 0;
     }
-
-    &--align-center {
+    &--align-center{
         transform-origin: top center;
     }
 }
-
-.c-dropdown__enter,
-.c-dropdown__leave-to {
+.v-enter-from,.v-leave-to{
     opacity: 0;
     transform: scale(0.95);
 }
-
-.c-dropdown__enter-active,
-.c-dropdown__leave-active {
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-}
-
-.c-dropdown__leave {
+.v-enter-to,.v-leave-from{
     opacity: 1;
     transform: scale(1);
+}
+.v-enter-active, .v-leave-active{
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 </style>

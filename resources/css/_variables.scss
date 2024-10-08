@@ -2,7 +2,7 @@
 vueファイルに書くテンプレート
 
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 
 </style>
 
@@ -18,23 +18,32 @@ vueファイルに書くテンプレート
 ---   Utility   ---
 -----------------*/
 
-// color 　　　　　　　　*defaultはprimarybuttonのbackgroundにも同色を使用
-$font-color_default: #1f2937;
-$font-color_date: #e37b89;
-$color_corp: #e3a8b1;
-$font-color_sub1: #b6a489;
 
-//  inputの外枠、button:focusの外枠、navlinkのcurrentpageなどに使用
-//  このプロジェクトではindigoを使用
+
+
+/*---------------
+---   Color   ---
+---------------*/
+// defaultはprimarybuttonのbackgroundにも同色を使用
+$font-color_default: #1f2937;
+$font-color_light: #6b7280;
+// inputの外枠、button:focusの外枠、navlinkのcurrentpageなどに使用
+// このプロジェクトではindigoを使用
 $accent-color: #4f46e5; 
 $accent-color_light: #6366f1;
 $accent-color_lightest: #eef2ff;
 $accent-color_dark: #4338ca;
-
-//  status,dangerbuttonなどに使用
+// status,dangerbuttonなどに使用
 $error-color: #DC2626;
 $success-color: #2563EB;
+// その他の色
+$bg-color_content: #ffffff;
+$bg-active_gray: #f3f4f6;
+$border_gray: #d1d5db;
 
+/*----------------
+----   Font   ----
+----------------*/
 // font-size
 $font-size_s: 0.75rem;
 $font-size_m: 0.875rem;
@@ -43,14 +52,15 @@ $font-size_l: 1.125rem;
 $font-size_xl: 1.5rem;
 $font-size_xxl: 1.875rem;
 $font-size_3l: 2.375rem;
-
 // font-weight    *default:400
 $font-weight_m: 500;
-
 // font-family
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
-$font-default: 'M PLUS Rounded 1c',sans-serif;
+$font_default: 'M PLUS Rounded 1c','Apple Color Emoji','Segoe UI Emoji',sans-serif;
 
+/*---------------
+---   Space   ---
+---------------*/
 // space
 $space_xs: 0.25rem;
 $space_sm: 0.5rem;
@@ -60,21 +70,21 @@ $space_lg: 1.5rem;
 $space_xl: 2rem;
 $space_xxl: 2.5rem;
 $space_3l: 3rem;
-
 // line-height
 $line-height_default: 1.2;
 $line-height_sm: 1.5;
 $line-height_md: 1.5rem;
 $line-height_lg: 1.75rem;
-
 // border-radius
 $radius_sm: 0.25rem;
 $radius_md: 0.375rem;
 $radius_lg: 0.5rem;
 
+/*----------------
+---   Others   ---
+----------------*/
 // box-shadow
 $box-shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
-
 //  responsive
 $breakpoints: (
   'sm': 'screen and (min-width: 640px)',

@@ -1,4 +1,4 @@
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 /*-----------------
 ---   Project   ---
 -----------------*/
@@ -42,7 +42,7 @@
     &-link{
         font-size: $font-size_m;
         line-height: $line-height_sm;
-        color: #4b5563;
+        color: $font-color_light;
         text-decoration: underline;
         &:hover{
             color: $font-color_default;

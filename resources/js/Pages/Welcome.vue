@@ -75,14 +75,12 @@ onMounted(() => {
     </div>
 </template>
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 /*----------------
 ---   Layout   ---
 ----------------*/
 .l-page{
     //background: #f9fafb; *画像を使用しない場合
-    color: $font-color_default;
-    font-family: $font-default;
     width: 100%;
     height: 100vh;
     overflow: hidden;

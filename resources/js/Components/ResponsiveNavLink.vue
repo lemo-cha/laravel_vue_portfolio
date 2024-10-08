@@ -24,8 +24,8 @@ const classes = computed(() =>
 </template>
 
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
-.c-navlink {
+@use 'resources/css/_variables.scss' as *;
+.c-navlink{
     display: block;
     width: 100%;
     padding: $space_sm $space_md;
@@ -33,23 +33,22 @@ const classes = computed(() =>
     text-align: start;
     font-size: $font-size_default;
     font-weight: $font-weight_m;
-    color: #4b5563;
     transition: all 0.15s ease-in-out;
-    &--active {
+    &--active{
         border-color: $accent-color_light;
         color: $accent-color_dark;
         background-color: $accent-color_lightest;
     }
-    &:hover {
+    &:hover{
         color: $font-color_default;
-        background-color: #f3f4f6;
-        border-color: #d1d5db;
+        background-color: $bg-active_gray;
+        border-color: $border_gray;
     }
-    &:focus {
+    &:focus{
         outline: none;
         color: $font-color_default;
-        background-color: #f3f4f6;
-        border-color: #d1d5db;
+        background-color: $bg-active_gray;
+        border-color: $border_gray;
     }
 }
 </style>

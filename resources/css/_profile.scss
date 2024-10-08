@@ -1,4 +1,4 @@
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 /*----------------
 ---   Layout   ---
 ----------------*/
@@ -23,7 +23,7 @@
 -----------------*/
 .p-content{
     padding: $space_md;
-    background: #ffffff;
+    background: $bg-color_content;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),$box-shadow-sm;
     @media #{map-get($breakpoints,'sm')}{
         padding: $space_xl;
@@ -42,7 +42,7 @@
     margin-top: $space_xs;
     font-size: $font-size_m;
     line-height: $line-height_sm;
-    color: #4b5563;
+    color: $font-color_light;
 }
 .p-content__form{
     margin-top: $space_lg;
@@ -81,7 +81,7 @@
     margin-top: $space_xs;
     font-size: $font-size_m;
     line-height: $line-height_sm;
-    color: #4b5563;
+    color: $font-color_light;
 }
 .p-modal__input{
     margin-top: $space_lg;
@@ -121,7 +121,7 @@
 .u-text-link{
     font-size: $font-size_m;
     line-height: $line-height_sm;
-    color: #4b5563;
+    color: $font-color_light;
     text-decoration: underline;
     &:hover{
         opacity: 0.7;
@@ -144,6 +144,6 @@
 .v-enter-active,.v-leave-active{
     transition: opacity 0.5s ease;
 }
-.v-enter, .v-leave-to{
+.v-enter-from, .v-leave-to{
     opacity: 0;
 }

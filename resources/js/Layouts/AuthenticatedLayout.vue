@@ -21,7 +21,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="p-nav__container_left-logo">
                                 <Link :href="route('admin.dashboard')">
-                                    <ApplicationLogo />
+                                    <ApplicationLogo class="p-logo"/>
                                 </Link>
                             </div>
 
@@ -76,7 +76,7 @@ const showingNavigationDropdown = ref(false);
 
                 <!-- Responsive Navigation Menu -->
                 <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
+                    :class="{ 'is-navshow': showingNavigationDropdown, 'is-navhidden': !showingNavigationDropdown }"
                     class="p-responsive-nav"
                 >
                     <div class="p-responsive-nav__link">
@@ -122,26 +122,24 @@ const showingNavigationDropdown = ref(false);
     </div>
 </template>
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 /*----------------
 ---   Layout   ---
 ----------------*/
 .l-page{
     min-height: 100vh; 
     //background: #F3F4F6; *画像を使用しない場合
-    color: $font-color_default;
-    font-family: $font-default;
     background: 
         linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
         url('/images/watercolor_00853_30722048.jpg') center / cover no-repeat fixed;
 }
 .l-nav{
     border-bottom-width: 1px; 
-    border-color: #F3F4F6;
-    background: #ffffff;
+    border-color: rgba($border_gray,0.5);
+    background: $bg-color_content;
 }
 .l-header{
-    background: #ffffff;
+    background: $bg-color_content;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1),0 1px 2px rgba(0,0,0,0.06);
 }
 /*-----------------
@@ -193,6 +191,10 @@ const showingNavigationDropdown = ref(false);
         }
     }
 }
+.p-logo{
+    width: 2.5rem;
+    height: auto;
+}
 .p-dropdown{
     display: inline-flex;
     border-radius: $radius_md;
@@ -200,22 +202,22 @@ const showingNavigationDropdown = ref(false);
 .p-dropdown__button{
     display: inline-flex;
     align-items: center;
-    padding: $space_sm $space_xsm; // px-3 py-2 に相当
+    padding: $space_sm $space_xsm;
     border: 1px solid transparent;
     font-size: $font-size_m;
     line-height: $line-height_sm;
     font-weight: $font-weight_m;
-    border-radius: $radius_md; // rounded-md
-    color: #6B7280; // text-gray-500
-    background-color: #FFFFFF; // bg-white
+    border-radius: $radius_md;
+    color: $font-color_light;
+    background-color: $bg-color_content;
     transition: all 150ms ease-in-out;
 
     &:hover {
-        color: #374151; // hover:text-gray-700
+        color: $font-color_default;
     }
 
     &:focus {
-        outline: none; // focus:outline-none
+        outline: none;
     }
     &-icon{
         margin-left: $space_sm;
@@ -238,15 +240,15 @@ const showingNavigationDropdown = ref(false);
     justify-content: center; 
     align-items: center; 
     border-radius: $radius_md; 
-    color: #6B7280;
+    color: $font-color_light;
     &:hover{
-        color: #6B7280; 
-        background-color: #F3F4F6; 
+        color: $font-color_light; 
+        background-color: $bg-active_gray; 
     }
     &:focus{
         outline-style: none; 
-        color: #6B7280; 
-        background-color: #F3F4F6; 
+        color: $font-color_light; 
+        background-color: $bg-active_gray; 
     }
 }
 .p-hamburger-menu__icon{
@@ -268,7 +270,7 @@ const showingNavigationDropdown = ref(false);
     padding-bottom: $space_xs;
     padding-top: $space_md;
     border-top-width: 1px;
-    border-color: #d1d5db;
+    border-color: $border_gray;
 }
 .p-setting-options__user-info{
     padding: 0 $space_md;
@@ -281,7 +283,7 @@ const showingNavigationDropdown = ref(false);
         font-size: $font-size_m;
         line-height: $line-height_sm;
         font-weight: $font-weight_m;
-        color: #6b7280;
+        color: $font-color_light;
     }
 }
 .p-setting-options__option{
@@ -303,5 +305,14 @@ const showingNavigationDropdown = ref(false);
     @media #{map-get($breakpoints,'lg')}{
         padding: $space_lg $space_xl;
     }
+}
+/*-----------------
+---   Utility   ---
+-----------------*/
+.is-navshow{
+    display: block;
+}
+.is-navhidden{
+    display: none;
 }
 </style>

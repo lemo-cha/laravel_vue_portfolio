@@ -96,5 +96,5 @@ const form = useForm({
     </section>
 </template>
 <style scoped lang="scss">
-@import "resources/css/_profile.scss";
+@use 'resources/css/_profile.scss';
 </style>

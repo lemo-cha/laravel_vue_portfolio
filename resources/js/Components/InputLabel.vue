@@ -12,12 +12,12 @@ defineProps({
         <span v-else><slot /></span>
     </label>
 </template>
+
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 .c-label{
     display: block;
     font-weight: $font-weight_m;
     font-size: $font-size_m;
 }
-
 </style>

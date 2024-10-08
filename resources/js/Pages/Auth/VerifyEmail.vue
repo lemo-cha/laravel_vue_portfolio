@@ -49,5 +49,5 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
     </GuestLayout>
 </template>
 <style scoped lang="scss">
-@import "resources/css/_auth.scss";
+@use 'resources/css/_auth.scss';
 </style>

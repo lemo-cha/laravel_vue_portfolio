@@ -21,7 +21,7 @@ import { Head } from '@inertiajs/vue3';
     </AuthenticatedLayout>
 </template>
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 /*----------------
 ---   Layout   ---
 ----------------*/
@@ -46,7 +46,7 @@ import { Head } from '@inertiajs/vue3';
 -----------------*/
 .p-content{
     overflow: hidden;
-    background: #ffffff;
+    background: $bg-color_content;
     box-shadow: $box-shadow-sm;
     @media #{map-get($breakpoints,'sm')}{
         border-radius: $radius_lg;

@@ -8,14 +8,14 @@ defineProps({
 
 <template>
     <div v-show="message">
-        <p class="text-sm text-red-600">
+        <p class="c-message__error">
             {{ message }}
         </p>
     </div>
 </template>
 
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 .c-message__error{
     display: block;
     font-size: $font-size_m;

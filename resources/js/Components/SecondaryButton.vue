@@ -17,10 +17,10 @@ defineProps({
 </template>
 
 <style scoped lang="scss">
-@import "resources/css/_button.scss";
+@use 'resources/css/_button.scss';
 </style>
 <!-- <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 .c-button__secondary {
     position: relative;
     display: inline-flex;

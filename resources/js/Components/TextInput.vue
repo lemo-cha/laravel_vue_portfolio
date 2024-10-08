@@ -25,11 +25,15 @@ defineExpose({ focus: () => input.value.focus() });
     />
 </template>
 <style scoped lang="scss">
-@import "resources/css/_variables.scss";
+@use 'resources/css/_variables.scss' as *;
 .c-input{
+    height: 2.625rem;
+    padding: 0 0.5rem; 
+    background: $bg-color_content;
     border-radius: $radius_md; 
-    border-color: #D1D5DB; 
+    border: 1px solid $border_gray;
     box-shadow: $box-shadow-sm;
+    font-size: 1rem;
     &:focus{
         border-color: $accent-color_light;
         box-shadow: 0 0 0 1px rgba($accent-color_light, 1);
