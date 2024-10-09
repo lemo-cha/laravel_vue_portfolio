@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { onMounted, ref } from 'vue';
 
@@ -10,17 +10,19 @@ const props = defineProps({
     canRegister: {
         type: Boolean,
     },
-    userRole: {
-        type: Array,
-    },
+    // userRole: {
+    //     type: Array,
+    // },
 });
 
 const getDashboardRoute = ref('');
 
+const page = usePage();
+
 onMounted(() => {
     //ログインしている場合、HOMEのLinkをroleごとにわける
-    if(props.userRole && props.userRole.length > 0){
-        let userRoleName = props.userRole[0].toLowerCase().replace(' ','');
+    if(page.props.userRole && page.props.userRole.length > 0){
+        let userRoleName = page.props.userRole[0].toLowerCase().replace(' ','');
         getDashboardRoute.value = route(`${userRoleName}.dashboard`);
     }
 });

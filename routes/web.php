@@ -6,11 +6,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// AppServiceProvider.phpに記載
+// Inertia::share([
+//     'userRole' => function(){
+//         return Auth::check() ? Auth::user()->getRoleNames() : [];
+//     },
+// ]);
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'userRole' => Auth::user() ? Auth::user()->getRoleNames() : [],
     ]);
 });
 

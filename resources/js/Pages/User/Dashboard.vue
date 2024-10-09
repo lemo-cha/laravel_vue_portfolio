@@ -8,15 +8,51 @@ import { Head } from '@inertiajs/vue3';
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">HOME</h2>
+            <h2>HOME</h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Userのダッシュボード</div>
+        <div class="l-page">
+            <div class="l-page__container">
+                <div class="p-content">
+                    <div class="p-content__text">Userのダッシュボード</div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
+<style scoped lang="scss">
+@use 'resources/css/_variables.scss' as *;
+/*----------------
+---   Layout   ---
+----------------*/
+.l-page{
+    padding: $space_3l 0;
+}
+.l-page__container{
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: $space_lg;
+    @media #{map-get($breakpoints,'sm')}{
+        padding: 0 $space_lg;
+    }
+    @media #{map-get($breakpoints,'lg')}{
+        padding: 0 $space_xl;
+    }
+}
+/*-----------------
+---   Project   ---
+-----------------*/
+.p-content{
+    overflow: hidden;
+    background: $bg-color_content;
+    box-shadow: $box-shadow-sm;
+    @media #{map-get($breakpoints,'sm')}{
+        border-radius: $radius_lg;
+    }
+}
+.p-content__text{
+    padding: $space_lg;
+}
+</style>

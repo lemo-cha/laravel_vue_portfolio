@@ -1,13 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+
+const page = usePage();
+
+//dashboard.vueへのrouteをroleを判定して設定
+const getDashboardRoute = ref('');
+const getCurrentRoute = ref('');
+onMounted(() => {
+    let userRoleName = page.props.userRole[0].toLowerCase().replace(' ','');
+    getDashboardRoute.value = route(`${userRoleName}.dashboard`);
+    getCurrentRoute.value = route().current(`${userRoleName}.dashboard`);
+});
 </script>
 
 <template>
@@ -20,16 +31,22 @@ const showingNavigationDropdown = ref(false);
                         <div class="p-nav__container_left">
                             <!-- Logo -->
                             <div class="p-nav__container_left-logo">
-                                <Link :href="route('admin.dashboard')">
+                                <Link :href="getDashboardRoute">
                                     <ApplicationLogo class="p-logo"/>
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="p-nav__container_left-link">
-                                <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
+                                <NavLink :href="getDashboardRoute" :active="getCurrentRoute">
                                     HOME
                                 </NavLink>
+                                <!-- role:User -->
+                                <!-- role:Admin -->
+                                <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')" v-if="page.props.userRole.includes('Admin')">
+                                    HOME2
+                                </NavLink>
+                                <!-- role:Super Admin -->
                             </div>
                         </div>
 
@@ -80,7 +97,7 @@ const showingNavigationDropdown = ref(false);
                     class="p-responsive-nav"
                 >
                     <div class="p-responsive-nav__link">
-                        <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
+                        <ResponsiveNavLink :href="getDashboardRoute" :active="getCurrentRoute">
                             HOME
                         </ResponsiveNavLink>
                     </div>

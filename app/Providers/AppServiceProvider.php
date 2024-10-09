@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Inertia::share([
+            'userRole' => function(){
+                return Cache::remember('userRole_' . Auth::id(), 60 , function(){
+                    return Auth::check() ? Auth::user()->getRoleNames() : [];
+                });
+            },
+        ]);
     }
 }
