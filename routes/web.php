@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,9 @@ use Inertia\Inertia;
 //     'userRole' => function(){
 //         return Auth::check() ? Auth::user()->getRoleNames() : [];
 //     },
+//     'flashMessage' => [
+//         'message' => Session::get('message'),
+//     ],
 // ]);
 
 Route::get('/', function () {
@@ -38,6 +42,7 @@ Route::middleware(['auth'])->group(function(){
         })->name('admin.dashboard');
 
         //ここからAdminのControllerを書く
+        Route::resource('units',UnitController::class);
     });
 
     //role:Super Admin

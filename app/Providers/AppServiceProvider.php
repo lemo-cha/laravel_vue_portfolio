@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
                     return Auth::check() ? Auth::user()->getRoleNames() : [];
                 });
             },
+            'flash' => function(){
+                return [
+                    'message' => Session::get('message'),
+                ];
+            }
         ]);
     }
 }

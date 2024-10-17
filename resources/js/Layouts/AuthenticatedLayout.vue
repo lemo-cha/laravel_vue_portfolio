@@ -7,6 +7,14 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
+const props = defineProps({
+    showFlashMessage : { //form.recentlySuccessfulなど *FlashMessageを表示させるページではバインドさせる
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+});
+
 const showingNavigationDropdown = ref(false);
 
 const page = usePage();
@@ -24,6 +32,11 @@ onMounted(() => {
 <template>
     <div>
         <div class="l-page">
+            <Transition>
+                <div v-if="props.showFlashMessage" class="p-flash-message">
+                    {{ $page.props.flash.message }}
+                </div>
+            </Transition>
             <nav class="l-nav">
                 <!-- Primary Navigation Menu -->
                 <div class="p-nav">
@@ -43,8 +56,8 @@ onMounted(() => {
                                 </NavLink>
                                 <!-- role:User -->
                                 <!-- role:Admin -->
-                                <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')" v-if="page.props.userRole.includes('Admin')">
-                                    HOME2
+                                <NavLink :href="route('units.index')" :active="route().current('units.index')" v-if="page.props.userRole.includes('Admin')">
+                                    units
                                 </NavLink>
                                 <!-- role:Super Admin -->
                             </div>
@@ -162,6 +175,17 @@ onMounted(() => {
 /*-----------------
 ---   Project   ---
 -----------------*/
+.p-flash-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: $bg-color_content;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
 .p-nav{
     padding: 0 $space_md;
     margin: 0 auto;
@@ -331,5 +355,11 @@ onMounted(() => {
 }
 .is-navhidden{
     display: none;
+}
+.v-enter-active,.v-leave-active{
+    transition: opacity 0.5s ease;
+}
+.v-enter-from, .v-leave-to{
+    opacity: 0;
 }
 </style>
