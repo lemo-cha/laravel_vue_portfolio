@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MakerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Foundation\Application;
@@ -43,6 +45,8 @@ Route::middleware(['auth'])->group(function(){
 
         //ここからAdminのControllerを書く
         Route::resource('units',UnitController::class);
+        Route::resource('categories',CategoryController::class);
+        Route::resource('makers',MakerController::class);
     });
 
     //role:Super Admin

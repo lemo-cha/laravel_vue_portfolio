@@ -8,69 +8,122 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Modal from '@/Components/Modal.vue';
+import SelectBox from '@/Components/SelectBox.vue';
 import { ref } from 'vue';
-import { padNumber } from '@/utils';
 
 const props = defineProps({
-    units:{
+    makers:{
         type: Array,
         default: () => [],
     },
+    company_types:{
+        type: Array,
+        default: () => [],
+    }
 });
+console.log(props.makers);
 const form = useForm({
     custom_id: '',
+    company_type: '',
     name: '',
+    brand: '',
 });
 const editForm = useForm ({
     custom_id: '',
+    company_type: '',
     name: '',
+    brand: '',
 });
 const deleteForm = useForm({});
 
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
-const selectId = ref(''); //データのprimaryKeyを取得し、editUnitからupdateUnit,deleteUnitからdestroyUnitに渡す
+const showHowToUseModal = ref(false);
+const selectId = ref(''); //データのprimaryKeyを取得し、editMakerからupdateMaker,deleteMakerからdestroyMakerに渡す
 
-const storeUnit = () => {
-    form.post(route('units.store'),{
+const storeMaker = () => {
+    form.post(route('makers.store'),{
         onSuccess: () => form.reset(),
     });
 }
-const editUnit = (unit) => {
+const editMaker = (maker) => {
     showEditModal.value = true;
-    editForm.custom_id = unit.custom_id;
-    editForm.name = unit.name;
-    selectId.value = unit.id;
+    editForm.custom_id = maker.custom_id.slice(0,-3);
+    editForm.company_type = maker.company_type;
+    editForm.name = maker.name;
+    editForm.brand = (maker.brand === null) ? '' : maker.brand;
+    selectId.value = maker.id;
 }
-const updateUnit = () => {
-    editForm.patch(route('units.update',{unit:selectId.value}),{
+const updateMaker = () => {
+    editForm.patch(route('makers.update',{maker:selectId.value}),{
         onSuccess: () => {
             closeModal();
             editForm.reset();
         }
     });
 }
-const deleteUnit = (id) => {
+const deleteMaker = (id) => {
     showDeleteModal.value = true;
     selectId.value = id;
 }
-const destroyUnit = () => {
-    deleteForm.delete(route('units.destroy',{unit:selectId.value}),{
+const destroyMaker = () => {
+    deleteForm.delete(route('makers.destroy',{maker:selectId.value}),{
         onSuccess: () => closeModal(),
     });
 }
 const closeModal = () => {
     showEditModal.value = false;
     showDeleteModal.value = false;
+    showHowToUseModal.value = false;
+}
+const showHowToUse = () => {
+    showHowToUseModal.value = true;
+
 }
 </script>
 
 <template>
-    <Head title="units" />
+    <Head title="makers" />
 
     <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful">
         <template #header>
-            <h2>商品単位</h2>
+            <div class="u-title-container">
+            <h2>メーカー・ブランド</h2>
+            <PrimaryButton @click="showHowToUse" class="u-title-container__button">使い方を確認</PrimaryButton>
+            </div>
+            <Modal :show="showHowToUseModal">
+                <div class="p-modal">
+                    <h2 class="p-modal__title">
+                        使い方
+                    </h2>
+
+                        <ol class="p-modal__text u-modal__how-to-use-list">
+                            <li>
+                                IDは、メーカー名の最初の一文字をアルファベットで入力してください<br>
+                                日本語読みで登録するのが望まれます<br>
+                                (例)OK[a,ka,shi,など] NG[la,ai,si,tu,など]
+                            </li>
+                            <li>
+                                アルファベット以降3桁の数字は、お好みでつけてください。必ず3桁で入力してください
+                            </li>
+                            <li>
+                                ブランド名は、未入力でも登録することができます<br>
+                                メーカーに通称があるとき、ブランド名に入力することでわかりやすくしたり、メーカーが扱っているブランドごとに分けたい場合に使用します<br>
+                                ブランドごとに登録する場合、同じIDを指定して、自動入力されたメーカー名をご確認ください<br>
+                                内部ではブランドごとにさらにIDを分けますが、自動で付与するので、任意の数字を当てることはできません<br>
+                            </li>
+                            <li>
+                                鋲螺製品について<br>
+                                鋲螺製品の場合、次のような登録方法が望ましいです<br>
+                                メーカー名：素材名(鉄、ステンレス等)<br>
+                                ブランド名：メッキ名(生地、ユニクロメッキ等)<br>
+                            </li>
+                        </ol>
+                    <div class="p-modal__button">
+                        <SecondaryButton @click="closeModal"> 閉じる </SecondaryButton>
+                    </div>
+                </div>
+            </Modal>
         </template>
 
         <div class="l-page">
@@ -78,7 +131,7 @@ const closeModal = () => {
                 <div class="p-content">
                     <div class="p-content__text">
                         <div class="p-content__form">
-                            <form @submit.prevent="storeUnit" class="p-content__form">
+                            <form @submit.prevent="storeMaker" class="p-content__form">
                                 <p class="p-content__form-title">新規登録</p>
                                 <!-- <p class="p-content__form-title">{{  }}</p> -->
                                 <div class="p-content__form-input">
@@ -86,7 +139,7 @@ const closeModal = () => {
 
                                     <TextInput
                                         id="custom_id"
-                                        type="number"
+                                        type="text"
                                         class="p-content__form-input-field"
                                         v-model="form.custom_id"
                                         required
@@ -96,7 +149,14 @@ const closeModal = () => {
                                     <InputError class="p-content__form-input-error" :message="form.errors.custom_id" />
                                 </div>
                                 <div class="p-content__form-input">
-                                    <InputLabel for="name" value="単位名" />
+                                    <InputLabel for="company_type" value="会社形態" />
+                                    
+                                    <SelectBox v-model="form.company_type" :options="company_types" class="p-content__form-input-field"/>
+
+                                    <InputError class="p-content__form-input-error" :message="form.errors.company_type" />
+                                </div>
+                                <div class="p-content__form-input">
+                                    <InputLabel for="name" value="メーカー名" />
 
                                     <TextInput
                                         id="name"
@@ -109,6 +169,19 @@ const closeModal = () => {
 
                                     <InputError class="p-content__form-input-error" :message="form.errors.name" />
                                 </div>
+                                <div class="p-content__form-input">
+                                    <InputLabel for="brand" value="ブランド名" />
+
+                                    <TextInput
+                                        id="brand"
+                                        type="text"
+                                        class="p-content__form-input-field"
+                                        v-model="form.brand"
+                                        autofocus
+                                    />
+
+                                    <InputError class="p-content__form-input-error" :message="form.errors.brand" />
+                                </div>
                                 <div class="p-content__button">
                                     <PrimaryButton type="submit" :disabled="form.processing">登録</PrimaryButton>
                                 </div>
@@ -118,49 +191,62 @@ const closeModal = () => {
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">No.</th>
                                 <th class="p-content__table--column-title">ID</th>
-                                <th class="p-content__table--column-title">商品単位</th>
+                                <th class="p-content__table--column-title">メーカー名</th>
+                                <th class="p-content__table--column-title">ブランド名</th>
                                 <th class="p-content__table--column-title"></th>
                                 <th class="p-content__table--column-title"></th>
                             </tr>
                             
-                            <tr v-for="(unit,index) in units" :key="unit.id" class="p-content__table--column">
+                            <tr v-for="(maker,index) in makers" :key="maker.id" class="p-content__table--column">
                                 <td class="p-content__table--column-data">{{ index + 1 }}</td>
-                                <td class="p-content__table--column-data">{{ padNumber(unit.custom_id,2) }}</td>
-                                <td class="p-content__table--column-data">{{ unit.name }}</td>
+                                <td class="p-content__table--column-data">{{ maker.custom_id.slice(0,-3) }}</td>
+                                <td class="p-content__table--column-data">{{ maker.abbr_name }}</td>
+                                <td class="p-content__table--column-data">{{ (maker.brand === null) ? '' : maker.brand }}</td>
                                 <td class="p-content__table--column-data">
-                                    <PrimaryButton :disabled="form.processing" @click="editUnit(unit)">編集</PrimaryButton>
+                                    <PrimaryButton :disabled="form.processing" @click="editMaker(maker)">編集</PrimaryButton>
                                 </td>
                                 <td class="p-content__table--column-data">
-                                    <DangerButton :disabled="form.processing" @click="deleteUnit(unit.id)">削除</DangerButton>
+                                    <DangerButton :disabled="form.processing" @click="deleteMaker(maker.id)">削除</DangerButton>
                                 </td>
                             </tr>
                         </table>
                         <Modal :show="showEditModal">
                             <div class="p-modal">
                                 <h2 class="p-modal__title">
-                                    単位名を編集
+                                    メーカー名を編集
                                 </h2>
 
                                 <p class="p-modal__text">
-                                    単位名を編集すると、登録済みの商品への単位も変更されます。<br>
-                                    登録済みの売上、仕入情報にも影響します。
+                                    メーカー名を編集すると、登録済みの商品への入力も変更されます<br>
+                                    登録済みの売上、仕入情報にも影響します<br>
+                                    <span class="u-modal__text--caution">
+                                        同じIDで登録があるとき、ID、会社形態、メーカー名を変更すると、すべての登録が変更されます
+                                    </span>
                                 </p>
-                                <form @submit.prevent="updateUnit">
+
+                                <form @submit.prevent="updateMaker">
                                     <div class="p-modal__input">
                                         <InputLabel for="custom_id" value="ID" />
 
                                         <TextInput
                                             id="custom_id"
                                             v-model="editForm.custom_id"
-                                            type="number"
+                                            type="text"
                                             class="p-modal__input-field"
                                             autofocus
                                         />
 
                                         <InputError :message="editForm.errors.custom_id" class="p-modal__input-error" />
                                     </div>
+                                    <div class="p-content__form-input">
+                                        <InputLabel for="company_type" value="会社形態" />
+
+                                        <SelectBox v-model="editForm.company_type" :options="company_types" class="p-modal__input-field"/>
+
+                                    <InputError class="p-content__form-input-error" :message="editForm.errors.company_type" />
+                                    </div>
                                     <div class="p-modal__input">
-                                        <InputLabel for="name" value="単位名" />
+                                        <InputLabel for="name" value="メーカー名" />
 
                                         <TextInput
                                             id="name"
@@ -172,6 +258,18 @@ const closeModal = () => {
                                         />
 
                                         <InputError class="p-modal__input-error" :message="editForm.errors.name" />
+                                    </div>
+                                    <div class="p-modal__input">
+                                        <InputLabel for="brand" value="ブランド名" />
+
+                                        <TextInput
+                                            id="brand"
+                                            type="text"
+                                            class="p-modal__input-field"
+                                            v-model="editForm.brand"
+                                        />
+
+                                        <InputError class="p-modal__input-error" :message="editForm.errors.brand" />
                                     </div>
 
                                     <div class="p-modal__button">
@@ -195,8 +293,8 @@ const closeModal = () => {
                                 </h2>
 
                                 <p class="p-modal__text">
-                                    商品情報と紐づいている単位名は削除できません。<br>
-                                    商品情報を編集して、単位名を使用していないことを確認してから、削除してください。
+                                    商品情報と紐づいているメーカー名は削除できません。<br>
+                                    商品情報を編集して、メーカー名を使用していないことを確認してから、削除してください。
                                 </p>
                                 <div class="p-modal__button">
                                     <SecondaryButton @click="closeModal"> キャンセル </SecondaryButton>
@@ -205,7 +303,7 @@ const closeModal = () => {
                                         class="u-button"
                                         :class="{ 'is-processing': form.processing }"
                                         :disabled="form.processing"
-                                        @click="destroyUnit"
+                                        @click="destroyMaker"
                                     >
                                         削除
                                     </DangerButton>
@@ -256,7 +354,7 @@ const closeModal = () => {
     display: flex;
 }
 .p-content__form{
-    width: 50%;
+    width: 45%;
     margin: $space_sm auto;
     &-title{
         text-align: center;
@@ -282,7 +380,7 @@ const closeModal = () => {
     align-items: center;
 }
 .p-content__table{
-    width: 50%;
+    width: 55%;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -371,5 +469,16 @@ const closeModal = () => {
 .is-processing{
     opacity: 0.25;
     pointer-events: none;
+}
+.u-title-container{
+    display: flex;
+    position: relative;
+    gap: $space_lg;
+}
+.u-modal__how-to-use-list{
+    list-style-type: number;
+}
+.u-modal__text--caution{
+    color: $error_color;
 }
 </style>

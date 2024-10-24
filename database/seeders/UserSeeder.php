@@ -16,28 +16,32 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $hashedPassword = Hash::make('password');
+
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'testuser@example.com',
-            'password' => Hash::make('password'),
+            'password' => $hashedPassword,
         ])->assignRole(Role::findByName('User'));
 
         User::factory()->create([
             'name' => 'Test User2',
             'email' => 'testuser2@example.com',
-            'password' => Hash::make('password'),
+            'password' => $hashedPassword,
         ])->assignRole(Role::findByName('User'));
 
         User::factory()->create([
             'name' => 'Test Admin',
             'email' => 'testadmin@example.com',
-            'password' => Hash::make('password'),
+            'password' => $hashedPassword,
         ])->assignRole(Role::findByName('Admin'));
 
         User::factory()->create([
             'name' => 'Test Super Admin',
             'email' => 'testsuperadmin@example.com',
-            'password' => Hash::make('password'),
+            'password' => $hashedPassword,
         ])->assignRole(Role::findByName('Super Admin'));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UnitRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,21 @@ class UnitRequest extends FormRequest
     {
         if($this->isMethod('post')){
             return [
-                'custom_id' => ['required','unique:units,custom_id','integer','between:1,99'],
-                'name' => ['required','unique:units,name','string','max:4'],
+                'custom_id' => ['required','unique:categories,custom_id','integer','between:1,999'],
+                'name' => ['required','unique:categories,name','string','max:50'],
             ];
         }else if($this->isMethod('patch')){
             return [
-                'custom_id' => ['required','unique:units,custom_id,' .$this->route('unit'),'integer','between:1,99'],
-                'name' => ['required','unique:units,name,' .$this->route('unit'),'string','max:4'],
+                'custom_id' => ['required','unique:categories,custom_id,' .$this->route('category'),'integer','between:1,999'],
+                'name' => ['required','unique:categories,name,' .$this->route('category'),'string','max:50'],
             ];
-        }
+        };
     }
 
     public function attributes(): array
     {
         return [
-            'name' => '単位名',
+            'name' => 'カテゴリー名',
         ];
     }
 }

@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\Unit;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UnitSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Unit::create([
+        Category::create([
             'custom_id' => 1,
-            'name' => '個',
+            'name' => '鋲螺',
         ]);
-        Unit::create([
+        Category::create([
             'custom_id' => 2,
-            'name' => '本',
+            'name' => '工具',
         ]);
-        Unit::create([
+        Category::create([
             'custom_id' => 3,
-            'name' => 'パック',
+            'name' => '電動工具',
         ]);
     }
 }

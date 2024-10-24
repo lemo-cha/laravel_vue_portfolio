@@ -57,7 +57,13 @@ onMounted(() => {
                                 <!-- role:User -->
                                 <!-- role:Admin -->
                                 <NavLink :href="route('units.index')" :active="route().current('units.index')" v-if="page.props.userRole.includes('Admin')">
-                                    units
+                                    Units
+                                </NavLink>
+                                <NavLink :href="route('categories.index')" :active="route().current('categories.index')" v-if="page.props.userRole.includes('Admin')">
+                                    Categories
+                                </NavLink>
+                                <NavLink :href="route('makers.index')" :active="route().current('makers.index')" v-if="page.props.userRole.includes('Admin')">
+                                    Makers
                                 </NavLink>
                                 <!-- role:Super Admin -->
                             </div>

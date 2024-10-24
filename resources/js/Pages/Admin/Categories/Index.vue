@@ -12,7 +12,7 @@ import { ref } from 'vue';
 import { padNumber } from '@/utils';
 
 const props = defineProps({
-    units:{
+    categories:{
         type: Array,
         default: () => [],
     },
@@ -29,33 +29,33 @@ const deleteForm = useForm({});
 
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
-const selectId = ref(''); //データのprimaryKeyを取得し、editUnitからupdateUnit,deleteUnitからdestroyUnitに渡す
+const selectId = ref(''); //データのprimaryKeyを取得し、editCategoryからupdateCategory,deleteCategoryからdestroyCategoryに渡す
 
-const storeUnit = () => {
-    form.post(route('units.store'),{
+const storeCategory = () => {
+    form.post(route('categories.store'),{
         onSuccess: () => form.reset(),
     });
 }
-const editUnit = (unit) => {
+const editCategory = (category) => {
     showEditModal.value = true;
-    editForm.custom_id = unit.custom_id;
-    editForm.name = unit.name;
-    selectId.value = unit.id;
+    editForm.custom_id = category.custom_id;
+    editForm.name = category.name;
+    selectId.value = category.id;
 }
-const updateUnit = () => {
-    editForm.patch(route('units.update',{unit:selectId.value}),{
+const updateCategory = () => {
+    editForm.patch(route('categories.update',{category:selectId.value}),{
         onSuccess: () => {
             closeModal();
             editForm.reset();
         }
     });
 }
-const deleteUnit = (id) => {
+const deleteCategory = (id) => {
     showDeleteModal.value = true;
     selectId.value = id;
 }
-const destroyUnit = () => {
-    deleteForm.delete(route('units.destroy',{unit:selectId.value}),{
+const destroyCategory = () => {
+    deleteForm.delete(route('categories.destroy',{category:selectId.value}),{
         onSuccess: () => closeModal(),
     });
 }
@@ -66,11 +66,11 @@ const closeModal = () => {
 </script>
 
 <template>
-    <Head title="units" />
+    <Head title="categories" />
 
     <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful">
         <template #header>
-            <h2>商品単位</h2>
+            <h2>商品カテゴリー</h2>
         </template>
 
         <div class="l-page">
@@ -78,7 +78,7 @@ const closeModal = () => {
                 <div class="p-content">
                     <div class="p-content__text">
                         <div class="p-content__form">
-                            <form @submit.prevent="storeUnit" class="p-content__form">
+                            <form @submit.prevent="storeCategory" class="p-content__form">
                                 <p class="p-content__form-title">新規登録</p>
                                 <!-- <p class="p-content__form-title">{{  }}</p> -->
                                 <div class="p-content__form-input">
@@ -96,7 +96,7 @@ const closeModal = () => {
                                     <InputError class="p-content__form-input-error" :message="form.errors.custom_id" />
                                 </div>
                                 <div class="p-content__form-input">
-                                    <InputLabel for="name" value="単位名" />
+                                    <InputLabel for="name" value="カテゴリー名" />
 
                                     <TextInput
                                         id="name"
@@ -118,34 +118,34 @@ const closeModal = () => {
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">No.</th>
                                 <th class="p-content__table--column-title">ID</th>
-                                <th class="p-content__table--column-title">商品単位</th>
+                                <th class="p-content__table--column-title">カテゴリー名</th>
                                 <th class="p-content__table--column-title"></th>
                                 <th class="p-content__table--column-title"></th>
                             </tr>
                             
-                            <tr v-for="(unit,index) in units" :key="unit.id" class="p-content__table--column">
+                            <tr v-for="(category,index) in categories" :key="category.id" class="p-content__table--column">
                                 <td class="p-content__table--column-data">{{ index + 1 }}</td>
-                                <td class="p-content__table--column-data">{{ padNumber(unit.custom_id,2) }}</td>
-                                <td class="p-content__table--column-data">{{ unit.name }}</td>
+                                <td class="p-content__table--column-data">{{ padNumber(category.custom_id,3) }}</td>
+                                <td class="p-content__table--column-data">{{ category.name }}</td>
                                 <td class="p-content__table--column-data">
-                                    <PrimaryButton :disabled="form.processing" @click="editUnit(unit)">編集</PrimaryButton>
+                                    <PrimaryButton :disabled="form.processing" @click="editCategory(category)">編集</PrimaryButton>
                                 </td>
                                 <td class="p-content__table--column-data">
-                                    <DangerButton :disabled="form.processing" @click="deleteUnit(unit.id)">削除</DangerButton>
+                                    <DangerButton :disabled="form.processing" @click="deleteCategory(category.id)">削除</DangerButton>
                                 </td>
                             </tr>
                         </table>
                         <Modal :show="showEditModal">
                             <div class="p-modal">
                                 <h2 class="p-modal__title">
-                                    単位名を編集
+                                    カテゴリー名を編集
                                 </h2>
 
                                 <p class="p-modal__text">
-                                    単位名を編集すると、登録済みの商品への単位も変更されます。<br>
+                                    カテゴリー名を編集すると、登録済みの商品への単位も変更されます。<br>
                                     登録済みの売上、仕入情報にも影響します。
                                 </p>
-                                <form @submit.prevent="updateUnit">
+                                <form @submit.prevent="updateCategory">
                                     <div class="p-modal__input">
                                         <InputLabel for="custom_id" value="ID" />
 
@@ -195,8 +195,8 @@ const closeModal = () => {
                                 </h2>
 
                                 <p class="p-modal__text">
-                                    商品情報と紐づいている単位名は削除できません。<br>
-                                    商品情報を編集して、単位名を使用していないことを確認してから、削除してください。
+                                    商品情報と紐づいているカテゴリー名は削除できません。<br>
+                                    商品情報を編集して、カテゴリー名を使用していないことを確認してから、削除してください。
                                 </p>
                                 <div class="p-modal__button">
                                     <SecondaryButton @click="closeModal"> キャンセル </SecondaryButton>
@@ -205,7 +205,7 @@ const closeModal = () => {
                                         class="u-button"
                                         :class="{ 'is-processing': form.processing }"
                                         :disabled="form.processing"
-                                        @click="destroyUnit"
+                                        @click="destroyCategory"
                                     >
                                         削除
                                     </DangerButton>
