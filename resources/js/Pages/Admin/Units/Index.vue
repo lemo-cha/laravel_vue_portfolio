@@ -68,7 +68,8 @@ const closeModal = () => {
 <template>
     <Head title="units" />
 
-    <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful">
+    <!-- <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful"> -->
+    <AuthenticatedLayout>
         <template #header>
             <h2>商品単位</h2>
         </template>
@@ -303,17 +304,6 @@ const closeModal = () => {
     &:nth-child(even){
         background: rgba($accent_color,0.3);
     }
-}
-.p-flash-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: $bg-color_content;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 9999;
 }
 .p-modal{
     padding: $space_lg;

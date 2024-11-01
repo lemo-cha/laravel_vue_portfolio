@@ -257,6 +257,17 @@ return [
         'username' => 'ユーザー名',
         'year' => '年',
         'custom_id' => 'ID',
+        'company_type' => '会社形態',
+        'kana' => '読み仮名',
+        'tel' => '電話番号',
+        'zip' => '郵便番号',
+        'claim_zip' => '請求先住所',
+        'claim_address' => '請求先郵便番号',
+        'invoice_date' => '請求日',
+        'bank_name' => '銀行名',
+        'bank_number' => '銀行番号',
+        'remarks' => '備考',
+        'is_active' => '取引状態',
     ],
 
 ];

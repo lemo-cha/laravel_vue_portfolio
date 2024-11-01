@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -7,51 +7,17 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
-// const props = defineProps({
-//     showFlashMessage : { //form.recentlySuccessfulなど *FlashMessageを表示させるページではバインドさせる
-//         type: Boolean,
-//         required: false,
-//         default: false,
-//     },
-// });
+const props = defineProps({
+    showFlashMessage : { //form.recentlySuccessfulなど *FlashMessageを表示させるページではバインドさせる
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+});
 
 const showingNavigationDropdown = ref(false);
+
 const page = usePage();
-
-// const showFlashMessageDuplicate = ref(false); //FlashMessageを、別のページに遷移して表示させたい時にform.recentlySuccessfulが使えないので代わりに使う。バインド不要
-// onMounted(() => { //flashMessageはページ遷移も共がほとんどなので、今はwatchではなくonMountedで定義することにする
-//     if(page.props.flash.message){
-//         showFlashMessageDuplicate.value = true;
-//         setTimeout(() => {
-//             showFlashMessageDuplicate.value = false;
-//         },2000);
-//     }
-// })
-
-
-
-// flash.messageの変化を監視
-const flashMessage = ref('');
-watch(
-    () => page.props.flash.message,
-    (newMessage) => {
-        if (newMessage) {
-        flashMessage.value = newMessage;
-
-        // 2秒後にメッセージを消去
-        setTimeout(() => {
-            flashMessage.value = '';
-        }, 2000);
-        }
-    },
-    { immediate: true } // 初期値も監視
-);
-
-
-
-
-
-
 
 //dashboard.vueへのrouteをroleを判定して設定
 const getDashboardRoute = ref('');
@@ -67,9 +33,8 @@ onMounted(() => {
     <div>
         <div class="l-page">
             <Transition>
-                <!-- <div v-if="showFlashMessage || showFlashMessageDuplicate" class="p-flash-message"> -->
-                <div v-if="flashMessage" class="p-flash-message">
-                    {{ flashMessage }}
+                <div v-if="showFlashMessage" class="p-flash-message">
+                    {{ $page.props.flash.message }}
                 </div>
             </Transition>
             <nav class="l-nav">

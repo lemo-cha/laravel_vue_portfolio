@@ -2,6 +2,7 @@
 import { toRefs } from 'vue';
 import { computed } from 'vue';
 
+//Enum型のデータ用のコンポーネント
 const props = defineProps({
     modelValue: [String, Number], // 親コンポーネントからの v-model を受け取る
     options: {

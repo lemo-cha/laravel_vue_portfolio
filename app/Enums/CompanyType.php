@@ -79,9 +79,9 @@ enum CompanyType: int
     }
 
     // 例) KK_PRE_SPACE = "株式会社 〇〇"
-    public static function getFullName(int $value,$companyName) : String
+    public static function getFullName(int $companyTypeValue,$companyName) : String
     {
-        $type = CompanyType::from($value);
+        $type = CompanyType::from($companyTypeValue);
 
         if($type->name === 'NO'){
             return $companyName;
@@ -107,9 +107,9 @@ enum CompanyType: int
         };
     }
     // 例) KK_PRE_SPACE = "(株)〇〇"
-    public static function getAbbrName(int $value,$companyName) : String
+    public static function getAbbrName(int $companyTypeValue,$companyName) : String
     {
-        $type = CompanyType::from($value);
+        $type = CompanyType::from($companyTypeValue);
 
         if($type->name === 'NO'){
             return $companyName;

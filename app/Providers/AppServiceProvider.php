@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             },
             'flash' => function(){
                 return [
-                    'message' => Session::get('message'),
+                    'message' => Session::get('message',''),
                 ];
             }
         ]);

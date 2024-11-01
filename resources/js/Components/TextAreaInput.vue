@@ -18,7 +18,7 @@ defineExpose({ focus: () => input.value.focus() });
 </script>
 
 <template>
-    <input
+    <textarea
         class="c-input"
         v-model="model"
         ref="input"
@@ -27,8 +27,8 @@ defineExpose({ focus: () => input.value.focus() });
 <style scoped lang="scss">
 @use 'resources/css/_variables.scss' as *;
 .c-input{
-    height: 2.625rem;
-    padding: 0 $space_sm; 
+    height: 8rem; //InputLabel+TextInput2個分
+    padding: $space_sm;
     background: $bg-color_content;
     border-radius: $radius_md; 
     border: 1px solid $border_gray;

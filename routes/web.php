@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MakerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnitController;
@@ -47,6 +48,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('units',UnitController::class);
         Route::resource('categories',CategoryController::class);
         Route::resource('makers',MakerController::class);
+        Route::resource('customers',CustomerController::class);
     });
 
     //role:Super Admin

@@ -8,7 +8,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Modal from '@/Components/Modal.vue';
-import SelectBox from '@/Components/SelectBox.vue';
+import SelectEnum from '@/Components/SelectEnum.vue';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -21,7 +21,6 @@ const props = defineProps({
         default: () => [],
     }
 });
-console.log(props.makers);
 const form = useForm({
     custom_id: '',
     company_type: '',
@@ -85,10 +84,11 @@ const showHowToUse = () => {
 <template>
     <Head title="makers" />
 
-    <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful">
+    <!-- <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful || editForm.recentlySuccessful || deleteForm.recentlySuccessful"> -->
+    <AuthenticatedLayout>
         <template #header>
             <div class="u-title-container">
-            <h2>メーカー・ブランド</h2>
+            <h2>メーカー・ブランド</h2> <!-- ***1 文字数に変更があればスタイル要編集 -->
             <PrimaryButton @click="showHowToUse" class="u-title-container__button">使い方を確認</PrimaryButton>
             </div>
             <Modal :show="showHowToUseModal">
@@ -115,6 +115,7 @@ const showHowToUse = () => {
                             <li>
                                 鋲螺製品について<br>
                                 鋲螺製品の場合、次のような登録方法が望ましいです<br>
+                                会社形態　：なし<br>
                                 メーカー名：素材名(鉄、ステンレス等)<br>
                                 ブランド名：メッキ名(生地、ユニクロメッキ等)<br>
                             </li>
@@ -151,7 +152,7 @@ const showHowToUse = () => {
                                 <div class="p-content__form-input">
                                     <InputLabel for="company_type" value="会社形態" />
                                     
-                                    <SelectBox v-model="form.company_type" :options="company_types" class="p-content__form-input-field"/>
+                                    <SelectEnum v-model="form.company_type" :options="company_types" class="p-content__form-input-field"/>
 
                                     <InputError class="p-content__form-input-error" :message="form.errors.company_type" />
                                 </div>
@@ -241,7 +242,7 @@ const showHowToUse = () => {
                                     <div class="p-content__form-input">
                                         <InputLabel for="company_type" value="会社形態" />
 
-                                        <SelectBox v-model="editForm.company_type" :options="company_types" class="p-modal__input-field"/>
+                                        <SelectEnum v-model="editForm.company_type" :options="company_types" class="p-modal__input-field"/>
 
                                     <InputError class="p-content__form-input-error" :message="editForm.errors.company_type" />
                                     </div>
@@ -402,17 +403,6 @@ const showHowToUse = () => {
         background: rgba($accent_color,0.3);
     }
 }
-.p-flash-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: $bg-color_content;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 9999;
-}
 .p-modal{
     padding: $space_lg;
 }
@@ -474,6 +464,11 @@ const showHowToUse = () => {
     display: flex;
     position: relative;
     gap: $space_lg;
+    &__button{
+        position: absolute;
+        top: -0.3rem;
+        left: 12rem; // ***1
+    }
 }
 .u-modal__how-to-use-list{
     list-style-type: number;
