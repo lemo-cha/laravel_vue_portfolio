@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customer extends Model
+class Supplier extends Model
 {
     use HasFactory;
 
@@ -22,7 +22,6 @@ class Customer extends Model
         'address',
         'billing_zip',
         'billing_address',
-        'closing_date',
         'bank_name',
         'bank_number',
         'remarks',

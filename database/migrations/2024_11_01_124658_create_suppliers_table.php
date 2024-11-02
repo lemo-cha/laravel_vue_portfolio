@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
             $table->integer('company_type');
@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('address');
             $table->string('billing_zip')->nullable();
             $table->string('billing_address')->nullable();
-            $table->integer('closing_date');
             $table->string('bank_name');
             $table->string('bank_number');
             $table->string('remarks')->nullable();
@@ -39,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('suppliers');
     }
 };

@@ -13,9 +13,6 @@ const props = defineProps({
     company_types: {
         type: Array,
     },
-    closing_types: {
-        type: Array,
-    },
 	is_actives: {
 		type: Array,
 	}
@@ -31,15 +28,14 @@ const form = useForm({
     address: '',
     billing_zip: '',
     billing_address: '',
-    closing_date: '',
     bank_name: '',
     bank_number: '',
     remarks: '',
     is_active: '',
 });
 
-const storeCustomer = () => {
-	form.post(route('customers.store'),{
+const storeSupplier = () => {
+	form.post(route('suppliers.store'),{
 		onSuccess: () => form.reset(),
     });
 }
@@ -59,7 +55,7 @@ const storeCustomer = () => {
                 <div class="p-content">
                     <div class="p-content__text">
 						<div class="p-content__form">
-                            <form @submit.prevent="storeCustomer" class="p-content__form">
+                            <form @submit.prevent="storeSupplier" class="p-content__form">
                                 <!-- <p class="p-content__form-title">{{  }}</p> -->
 								<div class="p-content__form-container">
 									<div class="p-content__form-wrap">
@@ -184,13 +180,6 @@ const storeCustomer = () => {
 
 											<InputError class="p-content__form-input-error" :message="form.errors.billing_address" />
 											
-										</div>
-										<div class="p-content__form-input">
-											<InputLabel for="closing_date" value="請求日" />
-											
-											<SelectHelper v-model="form.closing_date" :options="closing_types" class="p-content__form-input-field"/>
-
-											<InputError class="p-content__form-input-error" :message="form.errors.closing_date" />
 										</div>
 										<div class="p-content__form-input">
 											<InputLabel for="bank_name" value="銀行名" />

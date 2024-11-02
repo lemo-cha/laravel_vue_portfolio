@@ -10,10 +10,10 @@ import SelectHelper from '@/Components/SelectHelper.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 
 const props = defineProps({
-    company_types: {
-        type: Array,
+    supplier: {
+        type: Object,
     },
-    closing_types: {
+    company_types: {
         type: Array,
     },
 	is_actives: {
@@ -22,25 +22,24 @@ const props = defineProps({
 })
 
 const form = useForm({
-	custom_id: '',
-    company_type: '',
-    name: '',
-    kana: '',
-    tel: '',
-    zip: '',
-    address: '',
-    billing_zip: '',
-    billing_address: '',
-    closing_date: '',
-    bank_name: '',
-    bank_number: '',
-    remarks: '',
-    is_active: '',
+	custom_id: props.supplier.custom_id,
+    company_type: props.supplier.company_type,
+    name: props.supplier.name,
+    kana: props.supplier.kana,
+    tel: props.supplier.tel,
+    zip: props.supplier.zip,
+    address: props.supplier.address,
+    billing_zip: props.supplier.billing_zip,
+    billing_address: props.supplier.billing_address,
+    bank_name: props.supplier.bank_name,
+    bank_number: props.supplier.bank_number,
+    remarks: props.supplier.remarks,
+    is_active: props.supplier.is_active,
 });
 
-const storeCustomer = () => {
-	form.post(route('customers.store'),{
-		onSuccess: () => form.reset(),
+const updateSupplier = () => {
+    form.patch(route('suppliers.update',{supplier:props.supplier.id}),{
+        onSuccess: () => form.reset(),
     });
 }
 </script>
@@ -51,7 +50,7 @@ const storeCustomer = () => {
     <!-- <AuthenticatedLayout :showFlashMessage="form.recentlySuccessful"> -->
 	<AuthenticatedLayout>
         <template #header>
-            <h2>顧客情報 新規作成</h2>
+            <h2>顧客情報 編集</h2>
         </template>
 
         <div class="l-page">
@@ -59,7 +58,7 @@ const storeCustomer = () => {
                 <div class="p-content">
                     <div class="p-content__text">
 						<div class="p-content__form">
-                            <form @submit.prevent="storeCustomer" class="p-content__form">
+                            <form @submit.prevent="updateSupplier" class="p-content__form">
                                 <!-- <p class="p-content__form-title">{{  }}</p> -->
 								<div class="p-content__form-container">
 									<div class="p-content__form-wrap">
@@ -186,13 +185,6 @@ const storeCustomer = () => {
 											
 										</div>
 										<div class="p-content__form-input">
-											<InputLabel for="closing_date" value="請求日" />
-											
-											<SelectHelper v-model="form.closing_date" :options="closing_types" class="p-content__form-input-field"/>
-
-											<InputError class="p-content__form-input-error" :message="form.errors.closing_date" />
-										</div>
-										<div class="p-content__form-input">
 											<InputLabel for="bank_name" value="銀行名" />
 
 											<TextInput
@@ -247,7 +239,7 @@ const storeCustomer = () => {
 									取引状態を無効にする場合、備考に理由を入力するとわかりやすいです。他の情報を入力することもできます。
 								</p>
                                 <div class="p-content__button">
-                                    <PrimaryButton type="submit" :disabled="form.processing">登録</PrimaryButton>
+                                    <PrimaryButton type="submit" :disabled="form.processing">編集</PrimaryButton>
                                 </div>
                             </form>
                         </div>

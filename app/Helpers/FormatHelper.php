@@ -22,22 +22,22 @@ class FormatHelper
 	}
 
 	//締日の一覧・整形・select用
-	public static function getInvoiceDate()
+	public static function getClosingDate()
 	{
 		return [10,15,19,20,25,31];
 	}
 
-	public static function formatInvoiceDate($date)
+	public static function formatClosingDate($date)
 	{
 		return $date.'日';
 	}
 
-	public static function getInvoiceLabelList()
+	public static function getClosingLabelList()
 	{
-		return collect(self::getInvoiceDate())->map(function($date){
+		return collect(self::getClosingDate())->map(function($date){
 			return [
 				'value' => $date,
-				'label' => self::formatInvoiceDate($date),
+				'label' => self::formatClosingDate($date),
 			];
 		});
 	}

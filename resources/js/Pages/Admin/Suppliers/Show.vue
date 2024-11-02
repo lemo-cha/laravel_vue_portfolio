@@ -8,7 +8,7 @@ import { Head, router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const props = defineProps({
-    customer: {
+    supplier: {
         type: Object,
     }
 })
@@ -18,14 +18,14 @@ const showDeleteModal = ref(false);
 const backPage = () => {  // *** 未実装。前のページに戻るボタンを作りたい
     router.back();
 }
-const editCustomer = () => {
-    form.get(route('customers.edit',{customer:props.customer.id}));
+const editSupplier = () => {
+    form.get(route('suppliers.edit',{supplier:props.supplier.id}));
 }
-const deleteCustomer = () => {
+const deleteSupplier = () => {
     showDeleteModal.value = true;
 }
-const destroyCustomer = () => {
-    form.delete(route('customers.destroy',{customer:props.customer.id}));
+const destroySupplier = () => {
+    form.delete(route('suppliers.destroy',{supplier:props.supplier.id}));
 }
 const closeModal = () => {
     showDeleteModal.value = false;
@@ -48,44 +48,37 @@ const closeModal = () => {
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">ID</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.custom_id }}
+                                    {{ supplier.custom_id }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">名前</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.full_name }}
+                                    {{ supplier.full_name }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">読み仮名</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.kana }}
+                                    {{ supplier.kana }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">電話番号</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.tel }}
+                                    {{ supplier.tel }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">住所</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.address}}
+                                    {{ supplier.address}}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">請求先住所</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.billing_address }}
-                                </td>
-                            </tr>
-                            <tr class="p-content__table--column">
-                                <th class="p-content__table--column-title">請求日
-                                </th>
-                                <td class="p-content__table--column-data">
-                                    {{ customer.closing_date }}
+                                    {{ supplier.billing_address }}
                                 </td>
                             </tr>
                         </table>
@@ -93,45 +86,45 @@ const closeModal = () => {
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">銀行名</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.bank_name }}
+                                    {{ supplier.bank_name }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">口座番号</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.bank_number }}
+                                    {{ supplier.bank_number }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title" >備考</th>
                                 <td class="p-content__table--column-data" >
-                                    {{ customer.remarks }}
+                                    {{ supplier.remarks }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">取引状態</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.is_active }}
+                                    {{ supplier.is_active }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">登録日</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.created_at }}
+                                    {{ supplier.created_at }}
                                 </td>
                             </tr>
                             <tr class="p-content__table--column">
                                 <th class="p-content__table--column-title">最終更新日</th>
                                 <td class="p-content__table--column-data">
-                                    {{ customer.updated_at }}
+                                    {{ supplier.updated_at }}
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div class="p-content__button--container">
                         <SecondaryButton @click="route.back()">前のページに戻る</SecondaryButton>
-                        <PrimaryButton :disabled="form.processing" @click="editCustomer">編集</PrimaryButton>
-                        <DangerButton :disabled="form.processing" @click="deleteCustomer">削除</DangerButton>
+                        <PrimaryButton :disabled="form.processing" @click="editSupplier">編集</PrimaryButton>
+                        <DangerButton :disabled="form.processing" @click="deleteSupplier">削除</DangerButton>
                     </div>
                     <Modal :show="showDeleteModal">
                         <div class="p-modal">
@@ -149,7 +142,7 @@ const closeModal = () => {
                                 <DangerButton
                                     :class="{ 'is-processing': form.processing }"
                                     :disabled="form.processing"
-                                    @click="destroyCustomer"
+                                    @click="destroySupplier"
                                 >
                                     削除
                                 </DangerButton>

@@ -44,7 +44,7 @@ class CustomerController extends Controller
     {
         return Inertia::render('Admin/Customers/Create',[
             'company_types' => CompanyType::getLabelList(),
-            'invoice_types' => FormatHelper::getInvoiceLabelList(),
+            'closing_types' => FormatHelper::getClosingLabelList(),
             'is_actives' => FormatHelper::getActiveLabelList(),
         ]);
     }
@@ -76,8 +76,8 @@ class CustomerController extends Controller
             'kana' => $customer->kana,
             'tel' => FormatHelper::formatTelNumber($customer->tel),
             'address' => FormatHelper::formatZipCode($customer->zip).' '.$customer->address,
-            'claim_address' => ($customer->claim_zip === null && $customer->claim_address === null) ? '住所と同じ' : FormatHelper::formatZipCode($customer->claim_zip).' '.$customer-> claim_address,
-            'invoice_date' => FormatHelper::formatInvoiceDate($customer->invoice_date),
+            'billing_address' => ($customer->billing_zip === null && $customer->billing_address === null) ? '住所と同じ' : FormatHelper::formatZipCode($customer->billing_zip).' '.$customer-> billing_address,
+            'closing_date' => FormatHelper::formatClosingDate($customer->closing_date),
             'bank_name' => $customer->bank_name,
             'bank_number' => $customer->bank_number,
             'remarks' => $customer->remarks,
@@ -96,20 +96,21 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::find($customer->id,
-                        ['id','custom_id','company_type','name','kana','tel',
-                        'zip','address','claim_zip','claim_address','invoice_date',
-                        'bank_name','bank_number','remarks','is_active']);
+        $customer = Customer::find($customer->id,[
+            'id','custom_id','company_type','name','kana','tel',
+            'zip','address','billing_zip','billing_address','closing_date',
+            'bank_name','bank_number','remarks','is_active'
+        ]);
         
         // nullでvueに渡るとエラーが出るので''にする
-        $customer->claim_zip = $customer->claim_zip ?: '';
-        $customer->claim_address = $customer->claim_address ?: '';
+        $customer->billing_zip = $customer->billing_zip ?: '';
+        $customer->billing_address = $customer->billing_address ?: '';
         $customer->remarks = $customer->remarks ?: '';
 
         return Inertia::render('Admin/Customers/Edit',[
             'customer' => $customer,
             'company_types' => CompanyType::getLabelList(),
-            'invoice_types' => FormatHelper::getInvoiceLabelList(),
+            'closing_types' => FormatHelper::getClosingLabelList(),
             'is_actives' => FormatHelper::getActiveLabelList(),
         ]);
     }

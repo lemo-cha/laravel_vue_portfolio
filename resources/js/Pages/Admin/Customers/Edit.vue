@@ -16,7 +16,7 @@ const props = defineProps({
     company_types: {
         type: Array,
     },
-    invoice_types: {
+    closing_types: {
         type: Array,
     },
 	is_actives: {
@@ -32,9 +32,9 @@ const form = useForm({
     tel: props.customer.tel,
     zip: props.customer.zip,
     address: props.customer.address,
-    claim_zip: props.customer.claim_zip,
-    claim_address: props.customer.claim_address,
-    invoice_date: props.customer.invoice_date,
+    billing_zip: props.customer.billing_zip,
+    billing_address: props.customer.billing_address,
+    closing_date: props.customer.closing_date,
     bank_name: props.customer.bank_name,
     bank_number: props.customer.bank_number,
     remarks: props.customer.remarks,
@@ -46,7 +46,6 @@ const updateCustomer = () => {
         onSuccess: () => form.reset(),
     });
 }
-console.log(props.customer);
 </script>
 
 <template>
@@ -161,40 +160,40 @@ console.log(props.customer);
 											<InputError class="p-content__form-input-error" :message="form.errors.address" />
 										</div>
 										<div class="p-content__form-input">
-											<InputLabel for="claim_zip" value="請求先郵便番号" />
+											<InputLabel for="billing_zip" value="請求先郵便番号" />
 
 											<TextInput
-												id="claim_zip"
+												id="billing_zip"
 												type="text"
 												class="p-content__form-input-field"
-												v-model="form.claim_zip"
+												v-model="form.billing_zip"
 												autofocus
 											/>
 
-											<InputError class="p-content__form-input-error" :message="form.errors.claim_zip" />
+											<InputError class="p-content__form-input-error" :message="form.errors.billing_zip" />
 										</div>
 									</div>
 									<div class="p-content__form-wrap">
 										<div class="p-content__form-input">
-											<InputLabel for="claim_address" value="請求先住所" />
+											<InputLabel for="billing_address" value="請求先住所" />
 
 											<TextInput
-												id="claim_address"
+												id="billing_address"
 												type="text"
 												class="p-content__form-input-field"
-												v-model="form.claim_address"
+												v-model="form.billing_address"
 												autofocus
 											/>
 
-											<InputError class="p-content__form-input-error" :message="form.errors.claim_address" />
+											<InputError class="p-content__form-input-error" :message="form.errors.billing_address" />
 											
 										</div>
 										<div class="p-content__form-input">
-											<InputLabel for="invoice_date" value="請求日" />
+											<InputLabel for="closing_date" value="請求日" />
 											
-											<SelectHelper v-model="form.invoice_date" :options="invoice_types" class="p-content__form-input-field"/>
+											<SelectHelper v-model="form.closing_date" :options="closing_types" class="p-content__form-input-field"/>
 
-											<InputError class="p-content__form-input-error" :message="form.errors.invoice_date" />
+											<InputError class="p-content__form-input-error" :message="form.errors.closing_date" />
 										</div>
 										<div class="p-content__form-input">
 											<InputLabel for="bank_name" value="銀行名" />

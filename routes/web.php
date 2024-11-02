@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MakerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('categories',CategoryController::class);
         Route::resource('makers',MakerController::class);
         Route::resource('customers',CustomerController::class);
+        Route::resource('suppliers',SupplierController::class);
     });
 
     //role:Super Admin

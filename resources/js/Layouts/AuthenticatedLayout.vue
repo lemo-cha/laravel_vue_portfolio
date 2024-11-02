@@ -47,12 +47,6 @@ watch(
     { immediate: true } // 初期値も監視
 );
 
-
-
-
-
-
-
 //dashboard.vueへのrouteをroleを判定して設定
 const getDashboardRoute = ref('');
 const getCurrentRoute = ref('');
@@ -102,6 +96,9 @@ onMounted(() => {
                                 </NavLink>
                                 <NavLink :href="route('customers.index')" :active="route().current('customers.index')" v-if="page.props.userRole.includes('Admin')">
                                     Customers
+                                </NavLink>
+                                <NavLink :href="route('suppliers.index')" :active="route().current('suppliers.index')" v-if="page.props.userRole.includes('Admin')">
+                                    Suppliers
                                 </NavLink>
                                 <!-- role:Super Admin -->
                             </div>
