@@ -9,6 +9,7 @@ use App\Enums\CompanyType;
 use App\Http\Requests\MakerRequest;
 use App\Models\Maker;
 use App\Services\MakerService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MakerController extends Controller
@@ -99,5 +100,28 @@ class MakerController extends Controller
         ->with([
             'message' => '削除しました',
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        try{
+            $query = $request->get('q');
+            $makers = Maker::where('custom_id','LIKE',"%$query%")
+                        ->orWhere('name','LIKE',"%$query%")
+                        ->orWhere('brand','LIKE',"%$query%")
+                        ->select('id','custom_id','company_type','name','brand')
+                        ->get()
+                        ->map(function($maker){
+                            return [
+                                'id' => $maker->id,
+                                'custom_id' => $maker->custom_id,
+                                'name' => CompanyType::getAbbrName($maker->company_type,$maker->name),
+                                'brand' => $maker->brand,
+                                ];
+                            });
+                return response()->json($makers);
+            }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()],500);
+        }
     }
 }

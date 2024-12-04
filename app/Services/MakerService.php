@@ -11,9 +11,15 @@ class MakerService
         $makers = Maker::select('id', 'custom_id', 'company_type', 'name', 'brand')->get();
 
         $sortOrder = [
-            'a', 'i', 'u', 'e', 'o','ka', 'ki', 'ku', 'ke', 'ko','sa', 'shi', 'su', 'se', 'so',
-            'ta', 'chi', 'tsu', 'te', 'to','na', 'ni', 'nu', 'ne', 'no','ha', 'hi', 'fu', 'he', 'ho',
-            'ma', 'mi', 'mu', 'me', 'mo','ya', 'yu', 'yo','ra', 'ri', 'ru', 're', 'ro','wa', 'wo','n'
+            'a', 'i', 'u', 'e', 'o','ka', 'ki', 'ku', 'ke', 'ko','kya', 'kyu', 'kyo',
+            'ga', 'gi', 'gu', 'ge', 'go','gya', 'gyu', 'gyo','sa', 'shi', 'su', 'se', 'so',
+            'sha', 'shu', 'sho','za', 'ji', 'zu', 'ze', 'zo','ja', 'ju', 'jo',
+            'ta', 'chi', 'tsu', 'te', 'to','cha', 'chu', 'cho','da', 'di', 'du', 'de', 'do',
+            'na', 'ni', 'nu', 'ne', 'no','nya', 'nyu', 'nyo','ha', 'hi', 'fu', 'he', 'ho',
+            'hya', 'hyu', 'hyo','ba', 'bi', 'bu', 'be', 'bo','bya', 'byu', 'byo',
+            'pa', 'pi', 'pu', 'pe', 'po','pya', 'pyu', 'pyo','ma', 'mi', 'mu', 'me', 'mo',
+            'mya', 'myu', 'myo','ya', 'yu', 'yo','ra', 'ri', 'ru', 're', 'ro',
+            'rya', 'ryu', 'ryo','wa', 'wo', 'n'
         ];
         
         // アルファベットと数字部分でソート

@@ -4,8 +4,9 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Modal from '@/Components/Modal.vue';
-import { Head, router, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import BackButton from '@/Components/BackButton.vue';
 
 const props = defineProps({
     supplier: {
@@ -15,9 +16,6 @@ const props = defineProps({
 const form = useForm({});
 const showDeleteModal = ref(false);
 
-const backPage = () => {  // *** 未実装。前のページに戻るボタンを作りたい
-    router.back();
-}
 const editSupplier = () => {
     form.get(route('suppliers.edit',{supplier:props.supplier.id}));
 }
@@ -122,7 +120,7 @@ const closeModal = () => {
                         </table>
                     </div>
                     <div class="p-content__button--container">
-                        <SecondaryButton @click="route.back()">前のページに戻る</SecondaryButton>
+                        <BackButton />
                         <PrimaryButton :disabled="form.processing" @click="editSupplier">編集</PrimaryButton>
                         <DangerButton :disabled="form.processing" @click="deleteSupplier">削除</DangerButton>
                     </div>

@@ -28,4 +28,9 @@ class Customer extends Model
         'remarks',
         'is_active',
     ];
+
+    public function getRemarksAttribute($value)
+    {
+        return $value ?? '';
+    }
 }

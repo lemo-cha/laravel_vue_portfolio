@@ -1,8 +1,15 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Storage;
+
 class FormatHelper
 {
+	//カラムの画像URLがnullableの場合、判定する
+	public static function formatNullableImage($image,$noImage){
+		return !empty($image) ? Storage::url($image) : $noImage;
+	}
+
 	//郵便番号の整形
 	public static function formatZipCode($zip)
 	{

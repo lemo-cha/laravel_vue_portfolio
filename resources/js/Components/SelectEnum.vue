@@ -4,6 +4,10 @@ import { computed } from 'vue';
 
 //Enum型のデータ用のコンポーネント
 const props = defineProps({
+    inputId:{
+        type: String,
+        required: true,
+    },
     modelValue: [String, Number], // 親コンポーネントからの v-model を受け取る
     options: {
         type: Array,
@@ -21,7 +25,7 @@ const selectedValue = computed({
 });
 </script>
 <template>
-    <select v-model="selectedValue" class="c-select" required autofocus>
+    <select v-model="selectedValue" :id="inputId" :name="inputId" class="c-select" required autofocus>
         <option value="">
             選択してください
         </option>

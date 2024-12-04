@@ -16,4 +16,8 @@ class Unit extends Model
         'custom_id',
         'name',
     ];
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MakerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('makers',MakerController::class);
         Route::resource('customers',CustomerController::class);
         Route::resource('suppliers',SupplierController::class);
+        Route::resource('products',ProductController::class);
     });
 
     //role:Super Admin
@@ -75,4 +77,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth:sanctum')->group(function(){
+    Route::prefix('api')->group(function(){
+        Route::get('/categories/search',[CategoryController::class,'search']);
+        Route::get('/makers/search',[MakerController::class,'search']);
+        Route::get('/units/search',[UnitController::class,'search']);
+    });
+});
 require __DIR__.'/auth.php';

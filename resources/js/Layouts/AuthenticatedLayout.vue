@@ -100,6 +100,9 @@ onMounted(() => {
                                 <NavLink :href="route('suppliers.index')" :active="route().current('suppliers.index')" v-if="page.props.userRole.includes('Admin')">
                                     Suppliers
                                 </NavLink>
+                                <NavLink :href="route('products.index')" :active="route().current('products.index')" v-if="page.props.userRole.includes('Admin')">
+                                    Products
+                                </NavLink>
                                 <!-- role:Super Admin -->
                             </div>
                         </div>

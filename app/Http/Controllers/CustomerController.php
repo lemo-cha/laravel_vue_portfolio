@@ -96,11 +96,11 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer = Customer::find($customer->id,[
+        $customer = Customer::select([
             'id','custom_id','company_type','name','kana','tel',
             'zip','address','billing_zip','billing_address','closing_date',
             'bank_name','bank_number','remarks','is_active'
-        ]);
+        ])->findOrFail($customer->id);
         
         // nullでvueに渡るとエラーが出るので''にする
         $customer->billing_zip = $customer->billing_zip ?: '';

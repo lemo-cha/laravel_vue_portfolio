@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 // use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -85,5 +86,20 @@ class CategoryController extends Controller
         ->with([
             'message' => '削除しました',
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        try{
+            $query = $request->get('q');
+            $categories = Category::where('custom_id','LIKE',"%$query%")
+                                ->orWhere('name','LIKE',"%$query%")
+                                ->select('id','custom_id','name')
+                                ->get();
+
+            return response()->json($categories);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()],500);
+        }
     }
 }

@@ -93,11 +93,11 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        $supplier = Supplier::find($supplier->id,[
+        $supplier = Supplier::select([
             'id','custom_id','company_type','name','kana','tel','zip',
             'address','billing_zip','billing_address','bank_name',
             'bank_number','remarks','is_active'
-        ]);
+        ])->findOrFail($supplier->id);
 
         // nullでvueに渡るとエラーが出るので、''にする
         $supplier->billing_zip = $supplier->billing_zip ?: '';

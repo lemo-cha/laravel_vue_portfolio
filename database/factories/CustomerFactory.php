@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->lastKanaName();
+        $name = fake()->lastKanaName().fake()->firstKanaName();
         return [
             'custom_id' => fake()->unique()->randomNumber(3,true),
             'company_type' => fake()->randomElement(array_map(fn($case) => $case->value, CompanyType::cases())),

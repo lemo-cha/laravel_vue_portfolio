@@ -268,6 +268,13 @@ return [
         'bank_number' => '銀行番号',
         'remarks' => '備考',
         'is_active' => '取引状態',
+        'category_id' => 'カテゴリーID',
+        'maker_id' => 'メーカーID',
+        'unit_id' => '商品単位ID',
+        'product_number' => '品番',
+        'description' => '商品の説明',
+        'image_1' => 'メイン画像',
+        'image_2' => 'サブ画像1',
+        'image_3' => 'サブ画像2',
     ],
-
 ];

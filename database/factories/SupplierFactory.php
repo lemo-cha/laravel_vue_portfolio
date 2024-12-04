@@ -18,7 +18,7 @@ class SupplierFactory extends Factory
      */
     public function definition(): array
     {
-        $name = mb_convert_kana(fake()->lastKanaName(),"KVc");
+        $name = mb_convert_kana(fake()->lastKanaName().fake()->firstKanaName(),"KVc");
         return [
             'custom_id' => fake()->unique()->randomNumber(3,true),
             'company_type' => fake()->randomElement(array_map(fn($case) => $case->value, CompanyType::cases())),

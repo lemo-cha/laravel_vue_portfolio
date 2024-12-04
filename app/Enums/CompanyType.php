@@ -24,30 +24,30 @@ enum CompanyType: int
 {
     case NO = 0; //なし
 
-    case KK_PRE_SPACE  = 1;
-    case KK_PRE        = 2;
-    case KK_POST_SPACE = 3;
-    case KK_POST       = 4;
+    case KK_PRE_SPACE_Y  = 1;
+    case KK_PRE_SPACE_N  = 2;
+    case KK_POST_SPACE_Y = 3;
+    case KK_POST_SPACE_N = 4;
 
-    case YK_PRE_SPACE  = 5;
-    case YK_PRE        = 6;
-    case YK_POST_SPACE = 7;
-    case YK_POST       = 8;
+    case YK_PRE_SPACE_Y  = 5;
+    case YK_PRE_SPACE_N  = 6;
+    case YK_POST_SPACE_Y = 7;
+    case YK_POST_SPACE_N = 8;
 
-    case LLC_PRE_SPACE  = 9;
-    case LLC_PRE        = 10;
-    case LLC_POST_SPACE = 11;
-    case LLC_POST       = 12;
+    case LLC_PRE_SPACE_Y  = 9;
+    case LLC_PRE_SPACE_N  = 10;
+    case LLC_POST_SPACE_Y = 11;
+    case LLC_POST_SPACE_N = 12;
 
-    case LP_PRE_SPACE  = 13;
-    case LP_PRE        = 14;
-    case LP_POST_SPACE = 15;
-    case LP_POST       = 16;
+    case LP_PRE_SPACE_Y  = 13;
+    case LP_PRE_SPACE_N  = 14;
+    case LP_POST_SPACE_Y = 15;
+    case LP_POST_SPACE_N = 16;
 
-    case GP_PRE_SPACE  = 17;
-    case GP_PRE        = 18;
-    case GP_POST_SPACE = 19;
-    case GP_POST       = 20;
+    case GP_PRE_SPACE_Y  = 17;
+    case GP_PRE_SPACE_N  = 18;
+    case GP_POST_SPACE_Y = 19;
+    case GP_POST_SPACE_N = 20;
 
     // 例) KK_PRE_SPACE = "株式会社/前/スペース有"
     public static function getLabelList() : Array
@@ -69,7 +69,7 @@ enum CompanyType: int
                 default => "-",
             };
             $prefixPostfix = str_contains($type->name,'PRE') ? PRE : POST;
-            $space = str_contains($type->name,'SPACE') ? SPACE_Y : SPACE_N;
+            $space = str_contains($type->name,'SPACE_Y') ? SPACE_Y : SPACE_N;
 
             return [
                 'id' => $type->value,
@@ -97,7 +97,7 @@ enum CompanyType: int
 
         $prefixPostfix = str_contains($type->name,'PRE') ? PRE : POST;
 
-        $space = str_contains($type->name,'SPACE') ? SPACE_Y : SPACE_N;
+        $space = str_contains($type->name,'SPACE_Y') ? SPACE_Y : SPACE_N;
 
         return match(true){
             $prefixPostfix === PRE  && $space === SPACE_Y => "$companyType $companyName",

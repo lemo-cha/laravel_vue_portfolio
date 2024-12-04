@@ -18,4 +18,13 @@ class Maker extends Model
         'name',
         'brand',
     ];
+
+    public function getBrandAttribute($value)
+    {
+        return $value ?? '';
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }
