@@ -9,6 +9,8 @@ use App\Enums\CompanyType;
 use App\Enums\ProductStatus;
 use App\Helpers\FormatHelper;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Maker;
 use App\Models\Product;
 use App\Services\DeviceDetectionService;
 use App\Services\ProductService;
@@ -33,8 +35,17 @@ class ProductController extends Controller
     {
         $perPage = $this->deviceDetectionService->getPaginationCountByDeviceType($request,10,20,30);
 
-        $products = Product::with(['category:id,name','maker:id,company_type,name,brand'])
-        ->select('id','category_id','maker_id','name','size','product_number','description','image_1','status')->paginate($perPage);
+        $selectedCategory = $request->category ? 
+            Category::find($request->category)->only('id','custom_id','name') : '';
+
+        $selectedMaker = $request->maker ?
+            Maker::find($request->maker)->only('id','custom_id','company_type','name','brand') : '';
+        //selectedMakerにパラメータがある場合更にデータを整形
+        if($selectedMaker){
+            $selectedMaker['name'] = CompanyType::getAbbrName($selectedMaker['company_type'],$selectedMaker['name']);
+        }
+
+        $products = ProductService::getFilteredProducts($request,$perPage);
 
         $productsData = $products->map(function($product){
             $maker = CompanyType::getAbbrName($product->maker->company_type,$product->maker->name);
@@ -54,9 +65,12 @@ class ProductController extends Controller
 
         $products->setCollection($productsData);
 
-        return Inertia::render('Admin/Products/Index',[
+        return Inertia::render('Admin/Products/Index',array_filter([
+            'category' => $selectedCategory,
+            'maker' => $selectedMaker,
+            'search_word' => $request->searchWord,
             'products' => $products,
-        ]);
+        ]));
     }
 
     /**
@@ -99,8 +113,14 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::with('category:id,name','maker:id,company_type,name,brand')->
-        select('id','custom_id','category_id','maker_id','name','size','product_number','description','image_1','image_2','image_3','remarks','status')->find($product->id);
+        $product = Product::with(
+            'category:id,name',
+            'maker:id,company_type,name,brand')
+            ->select(
+                'id','custom_id','category_id','maker_id',
+                'name','size','product_number','description',
+                'image_1','image_2','image_3','remarks','status')
+            ->find($product->id);
 
         $maker = CompanyType::getFullName($product->maker->company_type,$product->maker->name);
 

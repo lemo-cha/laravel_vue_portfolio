@@ -1,18 +1,38 @@
 <script setup>
+import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
 import Pagination from '@/Components/Pagination.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SearchCategoryInput from '@/Components/SearchCategoryInput.vue';
+import SearchMakerInput from '@/Components/SearchMakerInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const props = defineProps({
+    category:{
+        type: Object,
+        required: false,
+    },
+    maker:{
+        type: Object,
+        required: false,
+    },
+    search_word:{
+        type: String,
+        required: false,
+    },
     products:{
         type: Object,
         default: [],
-    }
+    },
 })
+
+const categoryInput = ref(props.category?.id || '');
+const makerInput = ref(props.maker?.id || '');
+const searchWordInput = ref(props.search_word || '');
 
 const showModal = ref(false);
 const selectedProduct = ref({});
@@ -31,6 +51,17 @@ const showProduct = (id) => {
     router.get(route('products.show',{product: id}));
 }
 
+const searchProduct = () => {
+    router.get(route('products.index',{
+        category: categoryInput.value,
+        maker: makerInput.value,
+        searchWord: searchWordInput.value,
+    }),{
+        preserveState: true,
+        preserveScroll: true,
+    });
+};
+
 </script>
 
 <template>
@@ -48,7 +79,41 @@ const showProduct = (id) => {
             <div class="l-page__container">
                 <div class="p-content__sub">
                     <div class="p-search-box">
-                        <p>検索</p>
+                        <div class="p-content__form-wrap">
+                            <div class="p-content__form-input">
+                                <InputLabel for="category_id" value="カテゴリーを指定して検索" />
+                                <SearchCategoryInput 
+                                    inputId="category_id"
+                                    type="text"
+                                    class="p-content__form-input-field"
+                                    v-model="categoryInput"
+                                    v-bind="{ ...(props.category && { selectedCategory: props.category }) }"
+                                />
+                            </div>
+                            <div class="p-content__form-input">
+                                <InputLabel for="maker_id" value="メーカー・ブランドを指定して検索" />
+                                <SearchMakerInput 
+                                    inputId="maker_id"
+                                    type="text"
+                                    class="p-content__form-input-field"
+                                    v-model="makerInput"
+                                    v-bind="{ ...(props.maker && {selectedMaker: props.maker }) }"
+                                />
+                            </div>
+                            <div class="p-content__form-input">
+
+                                <InputLabel for="search_word" value="フリーワード検索"/>
+                                <TextInput 
+                                    inputId="search_word"
+                                    type="text"
+                                    class="p-content__form-input-field"
+                                    v-model="searchWordInput"
+                                />
+                            </div>
+                            <div class="p-content__button">
+                                <PrimaryButton type="button" @click="searchProduct">検索</PrimaryButton>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="p-content__main">
@@ -160,6 +225,36 @@ const showProduct = (id) => {
     @media #{map-get($breakpoints,'sm')}{
         border-radius: $radius_lg;
     }
+}
+.p-content__form{
+    margin: $space_sm auto;
+	margin-top: 0;
+	&-container{
+		display: flex;
+		justify-content: center;
+		gap: $space_3l;
+	}
+	&-wrap{
+		width: auto;
+	}
+    &-title{
+        text-align: center;
+        font-size: $font-size_l;
+    }
+    &-input{
+        margin-top: $space_lg;
+        &-field{
+            display: block;
+            margin-top: $space_xs;
+            width:  100%;
+        }
+    }
+}
+.p-content__button{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: $space_md;
 }
 .p-content__main{
     width: 70%;

@@ -106,6 +106,7 @@ const updateProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.category_id"
+                                                :useOnFocusout="true"
 												:selectedCategory="props.product.category"
 											/>
 
@@ -119,6 +120,7 @@ const updateProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.maker_id"
+                                                :useOnFocusout="true"
 												:selectedMaker="props.product.maker"
 											/>
 
@@ -132,6 +134,7 @@ const updateProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.unit_id"
+                                                :useOnFocusout="true"
 												:selectedUnit="props.product.unit"
 											/>
 
@@ -333,10 +336,6 @@ const updateProduct = () => {
             margin-top: $space_sm;
         }
     }
-}
-.p-content__form-v-model{
-	margin: 0.2rem;
-	min-height: 1rem;
 }
 .p-content__button{
 	margin-right: $space_3l;

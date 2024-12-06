@@ -14,8 +14,13 @@ const props = defineProps({
         required: true,
     },
     selectedMaker:{
-        type: [Object],
+        type: Object,
         required: false,
+    },
+    useOnFocusout:{ //searchメソッドを発火させるアクション@focusOutを追加するかどうか
+        type: Boolean,
+        required: false,
+        default: false,
     }
 })
 
@@ -50,6 +55,14 @@ defineExpose({ focus: () => input.value.focus() });
 const search = async (event) => {
     hasResults.value = false; // 検索が2回目以降であればtrueの可能性があるのでfalseにする
     displayValue.value = event.target.value; // 入力値を格納
+
+    //@focusoutを使わない(検索ボックスとして使用)、モーダル内のinputではない、入力値が空のとき、検索ボックスを空にする
+    if(!props.useOnFocusout && !showModal.value && displayValue.value === ''){
+        emit('update:modelValue','');
+        selectedName.value = '';
+        return;
+    }
+
     try{
         await getCsrfToken();
         const response = await apiClient.get('/makers/search',{
@@ -63,7 +76,7 @@ const search = async (event) => {
                 hasResults.value = true;
                 break;
             case 1 : // 1件のみの場合、モーダルは表示しない
-                hasResults.value = 
+                hasResults.value = false,
                 selectMaker(makers.value[0])
                 break;
             default : // 1件以上
@@ -88,11 +101,11 @@ const closeModal = () => {
     <div>
         <input
             :id="inputId"
-            class="c-input" 
+            class="c-input"
             :value="displayValue"
             ref="input"
             @keydown.enter.prevent="search"
-            @focusout="search"
+            v-on="{ ...(useOnFocusout && { focusout: search }) }"
         />
         <input
             :class="inputId"

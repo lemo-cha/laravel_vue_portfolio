@@ -88,6 +88,7 @@ const storeProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.category_id"
+                                                :useOnFocusout="true"
 											/>
 
 											<InputError class="p-content__form-input-error" :message="form.errors.category_id" />
@@ -100,6 +101,7 @@ const storeProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.maker_id"
+                                                :useOnFocusout="true"
 											/>
 
 											<InputError class="p-content__form-input-error" :message="form.errors.maker_id" />
@@ -112,6 +114,7 @@ const storeProduct = () => {
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.unit_id"
+                                                :useOnFocusout="true"F
 											/>
 
 											<InputError class="p-content__form-input-error" :message="form.errors.unit_id" />
@@ -161,7 +164,7 @@ const storeProduct = () => {
 											<InputLabel for="description" value="商品の説明" />
 
 											<TextAreaInput
-												id="remarks"
+												id="description"
 												type="text"
 												class="p-content__form-input-field"
 												v-model="form.description"
