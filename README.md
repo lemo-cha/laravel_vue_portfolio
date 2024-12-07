@@ -1,4 +1,4 @@
-##　インストール方法
+## インストール方法
 ①インストール
 git clone https://github.com/lemo-cha/laravel_vue_portfolio.git
 ②パッケージインストール
