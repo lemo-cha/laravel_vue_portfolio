@@ -20,12 +20,11 @@ npm run dev<br>
 ・顧客が来店しなくても、商品情報を見ることができる。<br>
 
 ※まだ未完成のため、以下に実装予定の処理を記載します<br>
-・レスポンシブ対応<br>
+・レスポンシブ対応、FLOCSS,scssの訂正<br>
 ・全体的なデザイン<br>
 ・商品の価格管理<br>
 ・商品の仕入登録、売上登録<br>
-・laravel_permissionを使用したページ閲覧制限<br>
-・FLOCSS,scssの訂正<br>
+・laravel_permissionを使用したページ閲覧制限(現在、role:Adminのページしか着手できておりません)<br>
 など
 
 ## 使用技術
