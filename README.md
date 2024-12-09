@@ -1,66 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## インストール方法
+①インストール<br>
+git clone https://github.com/lemo-cha/laravel_vue_portfolio.git<br>
+②パッケージインストール<br>
+composer install<br>
+npm install<br>
+③ご使用の環境に合わせて.envの調整、データベースの作成をしてください<br>
+④起動<br>
+php artisan serve<br>
+npm run dev<br>
+(開発環境)<br>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 在庫検索・管理アプリ
+このアプリは、「実店舗がある卸売業者が管理するアプリ(BtoB/C)」を想定し、作成しました。<br>
+管理者（業者）は商品の登録、仕入登録、売上登録、顧客や仕入先の登録などを行います。<br>
+ユーザー（顧客）は、商品の検索、在庫検索を行います。<br>
 
-## About Laravel
+### プロジェクトの目標
+・管理者は、商品情報/顧客情報/仕入先情報を管理することができる。<br>
+・顧客は、来店しなくても、商品情報を見ることができる。<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+※まだ未完成のため、以下に実装予定の処理を記載します<br>
+・レスポンシブ対応<br>
+・全体的なデザイン<br>
+・トップページ、dashboardページ<br>
+・商品の価格管理<br>
+・商品の仕入登録、売上登録<br>
+・laravel_permissionを使用したページ閲覧制限<br>
+・FLOCSS,scssの訂正<br>
+など
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 使用技術
+・Laravel<br>
+・Vue(Composition API)<br>
+・axios<br>
+・FLOCSS,scss<br>
+・Mysql<br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 工夫した点
+・Enum型による一貫性の確保<br>
+　会社形態の登録にEnum型を採用し、空白の有無の正確性や半角全角の統一性が保たれるようにしました。また、表示形式を「株式会社」「（株）」に簡単に切り替えができるようにしました。<br>
+・機器に応じたデータ件数の変更<br>
+　商品一覧表示画面で、ユーザーが使用している機器によってpaginationのデータ件数を変更できるようにしました。<br>
+・バックエンド主導のデータ整形<br>
+　バックエンド側でデータの編集を行いフロントエンドでは表示するだけ、と一貫性を持たせました(一部編集し忘れているかもしれません)<br>
 
-## Learning Laravel
+## 動作環境
+Laravel v11.22.0<br>
+Vue ^3.4.0<br>
+php 8.2.21<br>
+node v18.20.4<br>
+npm 10.7.0<br>
+mysql 5.7(8でも動作確認済みです)<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 画像について
+このプロジェクトで使用している画像（アプリアイコン・背景画像・ダミーに使用している画像）は、フリー使用が許可されているサイト様からダウンロードさせていただきました。ありがとうございます。二次使用は許可されておりませんので、このプロジェクトを公開しているブラウザ・ファイルからダウンロードして再使用することはご遠慮ください。
 
 ## License
-
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
