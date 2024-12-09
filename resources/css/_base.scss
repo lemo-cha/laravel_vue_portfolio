@@ -1,0 +1,37 @@
+@use 'resources/css/_variables.scss' as *;
+body{
+  font-family: $font_default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font-color_default;
+}
+// input[type="checkbox"] {
+//   width: 16px;
+//   height: 16px;
+//   cursor: pointer;
+
+// }
+// input[type="checkbox"] {
+//   width: 16px;
+//   height: 16px;
+//   appearance: none; // デフォルトの外観をリセット
+//   border: 2px solid #000;
+//   border-radius: 4px;
+//   background-color: #fff;
+//   cursor: pointer;
+//   position: relative; // 擬似要素の位置を調整するため
+
+//   &:checked {
+//     background-color: $accent-color;
+//     color: #fff; // チェックしたときの背景色
+//   }
+
+//   &:checked::after {
+//     content: '✔'; // チェックマークを表示
+//     color: #fff; // チェックマークの色
+//     position: absolute; // 位置を調整
+//     top: 0; // 上からの位置
+//     left: 2px; // 左からの位置
+//     font-size: 12px; // チェックマークのサイズ
+//   }
+// }

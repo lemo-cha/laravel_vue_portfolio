@@ -1,0 +1,64 @@
+@use 'resources/css/_variables.scss' as *;
+/*-----------------
+---   Project   ---
+-----------------*/
+.p-content{
+    margin-bottom: $space_md;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+}
+.p-status-text{
+    margin-bottom: $space_md;
+    font-size: $font-size_m;
+    line-height: $line-height_sm;
+    font-weight: $font-weight_m;
+    color: $success-color;
+}
+.p-content__input{
+    display: block;
+    margin-top: $space_xs;
+    width: 100%;
+}
+.p-content__error{
+    margin-top: $space_sm;
+}
+.p-content__checkbox{
+    display: block;
+    margin-top: $space_md;
+    &-label{
+        display: flex;
+        align-items: center;
+    }
+    &-text{
+        font-size: $font-size_m;
+        line-height: $line-height_sm;
+    }
+}
+.p-content__button{
+    display: flex;
+    margin-top: $space_md;
+    justify-content: flex-end;
+    align-items: center;
+    &-link{
+        font-size: $font-size_m;
+        line-height: $line-height_sm;
+        color: $font-color_light;
+        text-decoration: underline;
+        &:hover{
+            color: $font-color_default;
+        }
+    }
+    &-layout{
+        margin-inline-start: $space_md;
+    }
+}
+/*-----------------
+---   Utility   ---
+-----------------*/
+.u-button__layout-left{
+    justify-content: space-between;
+}
+.is-processing{
+    opacity: 0.25;
+    pointer-events: none;
+}

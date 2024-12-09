@@ -1,0 +1,53 @@
+@use 'resources/css/_variables.scss' as *;
+// button.scss
+.c-button {
+    height: 2.25rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: $space_sm $space_md;
+    border: 1px solid transparent;
+    border-radius: $radius_md;
+    font-weight: 600;
+    font-size: $font-size_s;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: $font-color_default;
+    &:hover{
+        opacity: 0.8;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:focus::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        bottom: -4px;
+        left: -4px;
+        border-radius: $radius_lg;
+        border: 2px solid rgba($accent-color_light, 0.5);
+        pointer-events: none;
+    }
+    // Secondary Button
+    &__secondary {
+        background-color: #ffffff;
+        border-color: $border_gray;
+        color: $font-color_default;
+    }
+    // Primary Button
+    &__primary {
+        background-color: #1f2937;
+        color: #ffffff;
+    }
+    // Danger Button
+    &__danger {
+        background-color: $error-color;
+        color: #ffffff;
+        &:focus::before {
+            border-color: rgba($error-color, 0.5);
+        }
+    }
+}
