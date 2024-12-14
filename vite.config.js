@@ -14,10 +14,20 @@ export default defineConfig({
         vue({
             template: {
                 transformAssetUrls: {
-                    base: null,
+                    base: null, //.envのAPP_URL
                     includeAbsolute: false,
                 },
             },
         }),
     ],
+    server: {
+        proxy:{
+            '/api':{
+                target: null, //.envのAPP_URL
+                changeOrigin: true,
+                secure: true,
+                rewrite:(path) => path.replace(/^\/api/, ''),
+            },
+        },
+    },
 });

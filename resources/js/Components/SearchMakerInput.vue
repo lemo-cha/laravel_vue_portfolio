@@ -105,8 +105,8 @@ const closeModal = () => {
             :value="displayValue"
             ref="input"
             @keydown.enter.prevent="search"
-            v-on="{ ...(useOnFocusout && { focusout: search }) }"
         />
+        <!-- v-on="{ ...(useOnFocusout && { focusout: search }) }"  ***108行目、動作確認-->
         <input
             :class="inputId"
             type="hidden"
