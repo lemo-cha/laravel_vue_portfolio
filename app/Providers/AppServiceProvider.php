@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if(env('APP_ENV') !== 'local'){
+            URL::forceScheme('https');
+        };
         Inertia::share([
             'userRole' => function(){
                 return Cache::remember('userRole_' . Auth::id(), 60 , function(){
