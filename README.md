@@ -4,11 +4,14 @@ git clone https://github.com/lemo-cha/laravel_vue_portfolio.git<br>
 ②パッケージインストール<br>
 composer install<br>
 npm install<br>
-③ご使用の環境に合わせて.envの調整、データベースの作成をしてください<br>
-④起動<br>
+③storageシンボリックの作成<br>
+php artisan storage:link<br>
+④.env.exampleをご活用いただき、ご自身の環境に合わせて.envの調整、データベースの作成をしてください<br>
+⑤起動<br>
 php artisan serve<br>
 npm run dev<br>
 (開発環境)<br>
+※現在、safariですと動作が重い可能性がありますので、chromeでご確認ください
 
 ## 在庫検索・管理アプリ
 このアプリは、「実店舗がある卸売業者が管理するアプリ(BtoB/C)」を想定し、作成しました。<br>
@@ -21,13 +24,14 @@ npm run dev<br>
 
 ※まだ未完成のため、以下に実装予定の処理を記載します<br>
 ・レスポンシブ対応<br>
-・全体的なデザイン<br>
 ・トップページ、dashboardページ<br>
 ・商品の価格管理<br>
 ・商品の仕入登録、売上登録<br>
 ・laravel_permissionを使用したページ閲覧制限<br>
 ・FLOCSS,scssの訂正<br>
-など
+・フロントエンドのバンドルサイズの最適化<br>
+など<br>
+最終調整ができていないため、ところどころ不十分な箇所があります
 
 ## 使用技術
 ・Laravel<br>

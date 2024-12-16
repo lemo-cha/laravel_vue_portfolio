@@ -24,9 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if(env('APP_ENV') !== 'local'){
+        if($this->app->environment('production')) {
             URL::forceScheme('https');
-        };
+        }
+        
         Inertia::share([
             'userRole' => function(){
                 return Cache::remember('userRole_' . Auth::id(), 60 , function(){
