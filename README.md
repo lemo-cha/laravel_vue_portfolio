@@ -7,7 +7,10 @@ npm install<br>
 ③storageシンボリックの作成<br>
 php artisan storage:link<br>
 ④.env.exampleをご活用いただき、ご自身の環境に合わせて.envの調整、データベースの作成をしてください<br>
-⑤起動<br>
+⑤データベース・ダミーデータ作成<br>
+php artisan migrate<br>
+php artisan db:seed<br>
+⑥起動<br>
 php artisan serve<br>
 npm run dev<br>
 (開発環境)<br>
